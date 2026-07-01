@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lapilli — The Ancient Game of Five and Capture</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #c9a84c;
+      --gold-lt: #e8d5a3;
+      --stone:   #1a1510;
+      --ink:     #2a2118;
+      --cream:   #f5efe0;
+      --rust:    #7a3b1e;
+    }
+
+    body {
+      background-color: var(--stone);
+      color: var(--cream);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      line-height: 1.85;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background:
+        linear-gradient(to bottom, rgba(10,8,5,0.55) 0%, rgba(10,8,5,0.85) 100%),
+        url('images/vesuvius.png') center / cover no-repeat;
+      border-bottom: 3px solid var(--gold);
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      color: var(--gold-lt);
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.8);
+    }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--gold-lt);
+      opacity: 0.85;
+    }
+    .hero-rule {
+      width: 80px;
+      height: 2px;
+      background: var(--gold);
+      margin: 2rem auto;
+      opacity: 0.6;
+    }
+    .hero-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* ── Content wrapper ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Section divider ── */
+    .divider {
+      text-align: center;
+      margin: 3.5rem 0 2.5rem;
+      color: var(--gold);
+      opacity: 0.5;
+      font-size: 1.4rem;
+      letter-spacing: 0.5em;
+    }
+
+    /* ── Story sections ── */
+    .story-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .story-section:last-of-type { border-bottom: none; }
+
+    .story-section p {
+      margin-bottom: 1.4em;
+      color: #ddd0bc;
+    }
+    .story-section p:last-child { margin-bottom: 0; }
+
+    em { color: var(--gold-lt); font-style: italic; }
+
+    /* ── Full-bleed mosaic images ── */
+    .mosaic-image {
+      width: 100%;
+      max-width: 900px;
+      margin: 3rem auto;
+      display: block;
+      border: 3px solid rgba(201, 168, 76, 0.4);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+    }
+    .mosaic-caption {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0.55;
+      margin-top: -2rem;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+    }
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      margin: 2.5rem 0;
+      padding: 1rem 2rem;
+      background: rgba(201, 168, 76, 0.05);
+    }
+    .pull-quote p {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--gold-lt) !important;
+      margin: 0 !important;
+    }
+
+    /* ── How to Play ── */
+    .how-to-play {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: 2px;
+      padding: 3rem 2.5rem;
+      margin: 4rem 0;
+    }
+    .how-to-play h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .how-to-play .subtitle {
+      font-style: italic;
+      color: var(--gold-lt);
+      opacity: 0.7;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .how-to-play h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 0.6rem;
+    }
+    .how-to-play p {
+      color: #ccc0aa;
+      margin-bottom: 1.2em;
+    }
+    .win-conditions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .win-card {
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 1.2rem 1.5rem;
+      background: rgba(201, 168, 76, 0.04);
+    }
+    .win-card .win-number {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .win-card p {
+      font-size: 0.95rem;
+      color: #bbb0a0;
+      margin: 0;
+    }
+    .capture-example {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: var(--gold-lt);
+      background: rgba(0,0,0,0.3);
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1.5rem;
+      margin: 1rem 0;
+      align-items: baseline;
+    }
+    .vocab-term {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .vocab-def {
+      color: #bbb0a0;
+      font-size: 0.95rem;
+    }
+
+    /* ── App download callout ── */
+    .app-callout {
+      text-align: center;
+      margin: 5rem 0 3rem;
+      padding: 3.5rem 2rem;
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      background: rgba(201, 168, 76, 0.03);
+    }
+    .app-callout .eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .app-callout h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--gold-lt);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .app-callout .platforms {
+      font-style: italic;
+      color: var(--gold-lt);
+      opacity: 0.75;
+      margin-bottom: 2rem;
+    }
+    .app-callout .app-store-btn {
+      display: inline-block;
+      padding: 0.85rem 2.4rem;
+      background: var(--gold);
+      color: var(--stone);
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--gold);
+      transition: opacity 0.2s;
+    }
+    .app-callout .app-store-btn:hover { opacity: 0.85; }
+    .app-callout .app-store-btn.coming-soon {
+      background: transparent;
+      color: var(--gold);
+      cursor: default;
+      opacity: 0.75;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.2);
+      margin-top: 4rem;
+    }
+    footer .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+    footer p {
+      font-size: 0.85rem;
+      color: rgba(201, 168, 76, 0.4);
+      letter-spacing: 0.1em;
+    }
+    footer a {
+      color: var(--gold);
+      opacity: 0.6;
+      text-decoration: none;
+    }
+    footer a:hover { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .win-conditions { grid-template-columns: 1fr; }
+      .how-to-play { padding: 2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <header class="hero">
+    <p class="hero-eyebrow">Pompeii · 79 AD</p>
+    <h1>LAPILLI</h1>
+    <p class="hero-sub">The ancient game of five and capture</p>
+    <div class="hero-rule"></div>
+    <p class="hero-date">Buried by Vesuvius &nbsp;·&nbsp; Rediscovered by the world</p>
+  </header>
+
+  <!-- ══════════════════ STORY ══════════════════ -->
+  <main class="content">
+
+    <!-- Section 1: Setting the scene -->
+    <section class="story-section">
+      <p>In the summer of 79 AD, the mountain above Pompeii was alive.</p>
+      <p>Not with fire — not yet — but with the low, restless tremors that the locals had grown so accustomed to that they no longer remarked on them. Vesuvius had shaken the region for years. It had cracked amphora, shifted doorframes, and sent wine sloshing from unattended cups. The citizens of Pompeii had learned to pour a little less and worry a little less, and life continued in the comfortable, unhurried rhythm of a prosperous Roman port city in high summer.</p>
+      <p>On the Via dell'Abbondanza, the main artery of the city, there was a thermopolium — a street-side tavern — run by a woman named Asellina, whose name is still scratched into the election notices on the wall outside. Her establishment was a favourite of soldiers, merchants, and the young men who did not yet need to be merchants. The counter was volcanic basalt, worn smooth by decades of elbows. The food was kept warm in terracotta vessels sunk into the stone. And at the back, where the light came in sideways through a narrow window, there was a gaming table.</p>
+      <p>It was here, in the months before the eruption, that a game was played which the men who played it simply called <em>lapilli</em> — little stones.</p>
+    </section>
+
+    <!-- IMAGE 1: Romans playing at the thermopolium -->
+    <img class="mosaic-image" src="images/thermopolium.png" alt="Romans playing Lapilli at Asellina's thermopolium">
+    <p class="mosaic-caption">Mosaic depiction · Asellina's thermopolium, Via dell'Abbondanza</p>
+
+    <!-- Section 2: The glass drops -->
+    <section class="story-section">
+      <p>The pieces were not carved or purchased. That is what made them remarkable.</p>
+      <p>Three doors down from Asellina's thermopolium, a glassblower named Eros kept his furnace burning from before sunrise until well after dark. Each morning he swept his workshop floor and found them waiting: small rounded drops of glass that had fallen from the rod overnight and cooled where they landed — perfect little domes, smooth on the bottom, slightly convex on top, fitting cleanly between thumb and forefinger. Most were discarded. Some he melted back down. But the ones in the two colours his furnace most often produced — a deep sea-green from the copper in his sand, and a warm amber-yellow from the iron and sulfur that clung to everything near the mountain — those he swept into a clay pot by the door.</p>
+      <p>Someone from Asellina's had started collecting them. No one remembered exactly when or who. What they remembered was that the drops were the right size, the right weight, and that when you set them on a scratched grid of nineteen lines, they sat still and caught the light.</p>
+    </section>
+
+    <!-- IMAGE 2: The glassblower Eros -->
+    <img class="mosaic-image" src="images/glassblower.png" alt="The glassblower Eros at his furnace in Pompeii">
+    <p class="mosaic-caption">Mosaic depiction · Eros at the furnace, his glass drops cooling on the floor</p>
+
+    <!-- Section 3: The game itself -->
+    <section class="story-section">
+      <p>The game that emerged from those glass drops was not Terni Lapilli, the old tic-tac-toe that children scratched on stepping stones. It was something deeper and more violent: a game of five, of encirclement, of the same custodial destruction that Roman legions practised on the field.</p>
+      <p>The object was to place five of your stones in a row — but the board did not stay still. A pair of your opponent's stones, caught between two of your own, was captured and removed. Flanked, and gone. The Romans had a word for this: <em>intercipere</em> — to seize in between. It was how they dealt with enemies. It was, the soldiers felt, entirely natural.</p>
+
+      <div class="pull-quote">
+        <p>"A position that looked winning could be collapsed in two moves by a well-placed capture. A player who had given up five stones was not losing — he might be baiting a trap."</p>
+      </div>
+
+      <p>A man named Marcus Decimus Vitalis — a veteran of the Legio II Adiutrix, passing through Pompeii on his way to retirement in Puteoli — is said to have taught the full rules to Asellina's regulars sometime in the spring of that year. He had learned the game at a garrison in Dacia, he told them, from a Greek-speaking merchant who claimed it was older than Rome. Whether this was true no one could verify.</p>
+      <p>By August, the game had its own vocabulary in Asellina's back room. A line of three open stones was a <em>tria</em>, a threat. A line of four was a <em>tessera</em> — a tile, a piece, a word that meant something nearly complete. And the winning line of five was, of course, the <em>lapilli</em> itself: five small stones in a row, simple as the mountain above, and just as inevitable once the sequence had begun. The mountain rumbled outside, and the men inside did not look up.</p>
+    </section>
+
+    <div class="divider">· · ·</div>
+
+    <!-- Section 4: The eruption -->
+    <section class="story-section">
+      <p>On the morning of August 24th, the mountain answered.</p>
+      <p>The eruption came in two phases. The first was lapilli — the real ones, the volcanic kind, pumice the size of a fist raining from a column of ash that rose eighteen miles into the sky. They fell for hours, filling the streets, collapsing roofs, burying the city under six metres of stone before the pyroclastic surge came at dawn and ended everything still living.</p>
+    </section>
+
+    <!-- IMAGE 3: Vesuvius erupting -->
+    <img class="mosaic-image" src="images/vesuvius.png" alt="Vesuvius erupting over Pompeii, 79 AD">
+    <p class="mosaic-caption">Mosaic depiction · The eruption of Vesuvius · August 24th, 79 AD</p>
+
+    <!-- Section 5: The discovery -->
+    <section class="story-section">
+      <p>When archaeologists excavated the thermopolium centuries later, they found the counter intact, the food still in the vessels, the election notices still on the wall. They found dice. They found coins. In the back room, beneath a layer of compacted pumice, they found a rectangular stone table with a nineteen-by-nineteen grid scratched into its surface, and beside it, in what had once been a wooden box, a collection of small glass drops — green and amber, smooth on their flat bases, domed on top, sorted into two groups, worn with the particular polish that only comes from being picked up and set down thousands of times.</p>
+      <p>No one had played them since that August morning. They had been waiting in the dark for two thousand years.</p>
+    </section>
+
+    <!-- IMAGE 4: The abandoned board -->
+    <img class="mosaic-image" src="images/board.png" alt="The Lapilli board discovered in the ruins of Pompeii">
+    <p class="mosaic-caption">Mosaic depiction · The board, as found · Pompeii excavations</p>
+
+    <!-- Section 6: The conclusion -->
+    <section class="story-section">
+      <p>The game that buried them had also preserved them.</p>
+      <p>That is the paradox of Pompeii, and the paradox of <em>lapilli</em> — the small stones that gave the game its name, and the small stones that fell from the sky and froze it in time. What the volcano destroyed, it also kept. What it ended, it made permanent.</p>
+      <p>We cannot know Marcus Decimus Vitalis. We cannot know if he made it to Puteoli. We cannot know who was winning when the mountain roared and the pieces scattered.</p>
+      <p>But we know the game. We know its shape and its logic and the particular pleasure of watching a pair of your opponent's stones vanish from the board. We know the three-in-a-row threat and the four-in-a-row inevitability and the five-in-a-row that ends everything.</p>
+      <p>The Romans knew it too. They played it with drops of glass from the furnace down the street, green and amber against a scratched grid, while the mountain that would bury them rumbled quietly outside.</p>
+      <p><strong style="color: var(--gold-lt);">We play it still.</strong></p>
+    </section>
+
+    <div class="divider">· · ·</div>
+
+    <!-- ══════════════════ HOW TO PLAY ══════════════════ -->
+    <div class="how-to-play">
+      <h2>How to Play Lapilli</h2>
+      <p class="subtitle">The rules of the ancient game, as played today</p>
+
+      <h3>The Board</h3>
+      <p>Lapilli is played on a 19×19 grid of intersections. Stones are placed on the intersections — not the squares — in the manner of Go. The board begins entirely empty.</p>
+
+      <h3>Two Ways to Win</h3>
+      <div class="win-conditions">
+        <div class="win-card">
+          <div class="win-number">Five</div>
+          <p><strong>In a row.</strong> Place five or more of your stones in an unbroken line — horizontally, vertically, or diagonally.</p>
+        </div>
+        <div class="win-card">
+          <div class="win-number">Five</div>
+          <p><strong>Captured pairs.</strong> Seize ten of your opponent's stones — pair by pair — until they can no longer defend.</p>
+        </div>
+      </div>
+
+      <h3>Opening Move</h3>
+      <p>The first player opens on the center intersection. Under tournament rules (recommended), the first player's <em>second</em> stone must be placed at least three intersections away from center — this limits the first-player advantage and keeps the game balanced.</p>
+
+      <h3>Captures</h3>
+      <p>This is what sets Lapilli apart from all other five-in-a-row games. When exactly two of your opponent's stones sit adjacent to each other, they can be seized by flanking them on both ends with your own stones in a straight line — the Roman <em>intercipere</em>.</p>
+
+      <div class="capture-example">⬤ ○ ○ ▢ &nbsp;→&nbsp; place your stone &nbsp;→&nbsp; ⬤ ○ ○ ⬤ &nbsp;→&nbsp; ⬤ ▢ ▢ ⬤</div>
+
+      <p>Captures work horizontally, vertically, and diagonally. Multiple pairs can be captured in a single move. Importantly: you may safely place a stone between two enemy stones — a pair is captured only when the opponent flanks it, not when you complete it yourself.</p>
+
+      <h3>The Language of the Game</h3>
+      <div class="vocab-grid">
+        <span class="vocab-term">Tria</span>
+        <span class="vocab-def">Three unblocked stones in a row — a live threat that demands a response.</span>
+        <span class="vocab-term">Tessera</span>
+        <span class="vocab-def">Four unblocked stones in a row — nearly always a forced win on the next move.</span>
+        <span class="vocab-term">Lapilli</span>
+        <span class="vocab-def">Five stones in a row. The game ends. The mountain has spoken.</span>
+        <span class="vocab-term">Intercipere</span>
+        <span class="vocab-def">To seize in between — a capture. Two of your opponent's stones, flanked and removed.</span>
+      </div>
+
+      <h3>Strategy</h3>
+      <p>The central tension of Lapilli is between building lines and preventing captures. A row of five wins the game — but formations that are vulnerable to flanking can be dismantled in a single move. The strongest players maintain <em>initiative</em>: creating threats faster than the opponent can respond, forcing them to defend while your own positions compound.</p>
+      <p>Avoid adjacent pairs early — they are the only formations susceptible to capture. Build instead with stretch twos (stones with a gap between them), which threaten to extend into a tria without exposing themselves to immediate seizure. When you form an unblocked four, announce it: <em>tessera</em>. It is considered good form to give your opponent the chance to stop what is coming.</p>
+
+      <h3>Variants</h3>
+      <p><strong style="color: var(--gold-lt);">Keryo-Lapilli:</strong> Captures extend to triplets as well as pairs. The capture-victory threshold rises to fifteen stones. Proposed by champion Rollie Tesh in 1983 to reward more aggressive and tactical play.</p>
+      <p><strong style="color: var(--gold-lt);">Tournament (Pro) Rules:</strong> The first player's second stone must be placed outside the inner 5×5 zone. Reduces the first-player advantage at high levels of play.</p>
+    </div>
+
+    <!-- ══════════════════ APP DOWNLOAD ══════════════════ -->
+    <div class="app-callout">
+      <p class="eyebrow">Available for</p>
+      <h2>iPad · iPhone · Mac</h2>
+      <p class="platforms">Best experienced on iPad or a larger screen</p>
+      <a href="#" class="app-store-btn coming-soon">Coming to the App Store</a>
+    </div>
+
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer>
+    <div class="footer-logo">LAPILLI</div>
+    <p>lapilli.app &nbsp;·&nbsp; The ancient game of five and capture</p>
+    <br>
+    <p style="font-size:0.75rem; opacity:0.4;">The game mechanics of Lapilli derive from a tradition of five-in-a-row games played across the ancient world.<br>
+    The name and this presentation are original works.</p>
+  </footer>
+
+</body>
+</html>
