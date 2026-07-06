@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Lapilli — Tester's Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold:#c9a84c; --gold-lt:#e8d5a3; --stone:#1a1510; --cream:#f5efe0; }
+    body {
+      background: var(--stone); color: var(--cream);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.15rem; line-height: 1.8;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    h1 { font-family: 'Cinzel', serif; color: var(--gold-lt); font-size: 2.2rem; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .lede { font-style: italic; color: var(--gold-lt); opacity: 0.8; margin-bottom: 2.5rem; }
+    h2 {
+      font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.35rem;
+      letter-spacing: 0.06em; margin: 3rem 0 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(201,168,76,0.25);
+    }
+    h3 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 1.8rem 0 0.5rem; }
+    p, li { color: #ddd0bc; margin-bottom: 1rem; }
+    ol, ul { padding-left: 1.6rem; margin-bottom: 1.2rem; }
+    li { margin-bottom: 0.6rem; }
+    a { color: var(--gold); }
+    strong { color: var(--gold-lt); }
+    .toc {
+      background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.3);
+      padding: 1.5rem 2rem; margin: 2rem 0;
+    }
+    .toc-title { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.8rem; }
+    .toc ol { margin-bottom: 0; }
+    .toc li { margin-bottom: 0.3rem; }
+    .callout {
+      border-left: 3px solid var(--gold); background: rgba(201,168,76,0.06);
+      padding: 1rem 1.5rem; margin: 1.5rem 0;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .device-tag { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+    .top { display: block; text-align: right; font-size: 0.85rem; margin-top: 1rem; opacity: 0.7; }
+    code { background: rgba(0,0,0,0.35); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.95em; }
+  </style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <h1>Welcome, Tester</h1>
+  <p class="lede">Thank you for helping test Lapilli Stones — a board game of five-in-a-row and captures, played with glass beads on a Roman wooden board. This page walks you through everything, step by step. No technical experience needed.</p>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#need">What you'll need</a></li>
+      <li><a href="#email">Step 1 — Send me your email address</a></li>
+      <li><a href="#testflight">Step 2 — Get TestFlight (the beta app store)</a></li>
+      <li><a href="#invite">Step 3 — Accept the invitation and install Lapilli</a></li>
+      <li><a href="#gamecenter">Step 4 — Turn on Game Center (for online play)</a></li>
+      <li><a href="#firstplay">Step 5 — First launch</a></li>
+      <li><a href="#whattotest">What to test</a></li>
+      <li><a href="#reporting">How to report problems, questions, and ideas</a></li>
+      <li><a href="#troubleshooting">If something's not working</a></li>
+    </ol>
+  </div>
+
+  <h2 id="need">1. What you'll need</h2>
+  <ul>
+    <li>An <strong>iPhone or iPad</strong> running iOS 17 or newer, or a <strong>Mac</strong> running macOS 14 (Sonoma) or newer. Any of the three works; if you have more than one, you can install on all of them.</li>
+    <li>Your <strong>Apple Account</strong> (the email and password you already use for the App Store and iCloud). You're signed in already if you can download apps.</li>
+    <li>About <strong>ten minutes</strong> for setup, and then however long you enjoy playing.</li>
+  </ul>
+  <p>Everything is free. Testing costs nothing and nothing you do can break anything on my end — that's the point of testing.</p>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="email">2. Step 1 — Send me your email address</h2>
+  <p>I need to add you to the tester list by email. Send me:</p>
+  <ol>
+    <li><strong>The email address of your Apple Account.</strong> To find it: on iPhone or iPad, open <strong>Settings</strong> and tap your name at the very top — your email shows under your name. On a Mac, open <strong>System Settings</strong> and click your name at the top of the sidebar.</li>
+  </ol>
+  <div class="callout">
+    <p><strong>Send it to:</strong> <a href="mailto:lapilli-stones@proton.me">lapilli-stones@proton.me</a> — or just text it to me if we know each other that way. (We probably do.)</p>
+  </div>
+  <p>Once I've added you, Apple will send you an invitation email titled something like <em>"Eddie Merkel has invited you to test Lapilli Stones."</em> It can take a few minutes to arrive. Check spam if it doesn't.</p>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="testflight">3. Step 2 — Get TestFlight</h2>
+  <p><strong>TestFlight is Apple's official app for testing apps before they reach the App Store.</strong> It's made by Apple, it's free, and it's safe.</p>
+  <p><span class="device-tag">iPhone / iPad</span><br>
+  Open the <strong>App Store</strong>, search for <strong>TestFlight</strong>, and download it (blue icon with a white propeller). </p>
+  <p><span class="device-tag">Mac</span><br>
+  Open the <strong>App Store</strong> app on the Mac, search for <strong>TestFlight</strong>, and download it.</p>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="invite">4. Step 3 — Accept the invitation and install Lapilli</h2>
+  <ol>
+    <li>Open the invitation email <strong>on the device you want to play on</strong>.</li>
+    <li>Tap or click the <strong>View in TestFlight</strong> button in the email.</li>
+    <li>TestFlight opens and shows Lapilli Stones. Tap <strong>Accept</strong>, then <strong>Install</strong>.</li>
+    <li>When it finishes, tap <strong>Open</strong> — or find Lapilli on your home screen / in your Applications folder like any other app.</li>
+  </ol>
+  <div class="callout">
+    <p>Installing on more than one device? Just open TestFlight on each device (signed in with the same Apple Account) — Lapilli will be there waiting. No need for a second invitation.</p>
+  </div>
+  <p>When I release a new test version, TestFlight will notify you. Open TestFlight and tap <strong>Update</strong> — your saved games survive updates.</p>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="gamecenter">5. Step 4 — Turn on Game Center</h2>
+  <p>You only need this for <strong>online play</strong> — playing me (or another tester) remotely, one move at a time, like chess by mail. Solo play works without it.</p>
+  <p><span class="device-tag">iPhone / iPad</span><br>
+  Open <strong>Settings</strong>, scroll down and tap <strong>Game Center</strong>, and turn it on. It uses your Apple Account; you can pick a player nickname.</p>
+  <p><span class="device-tag">Mac</span><br>
+  Open <strong>System Settings</strong>, type <strong>Game Center</strong> in the search box, and sign in there.</p>
+  <div class="callout">
+    <p>Online games between us are easiest if we're Game Center friends — when you send me your email, tell me your <strong>Game Center nickname</strong> too and I'll send a friend request.</p>
+  </div>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="firstplay">6. Step 5 — First launch</h2>
+  <p>Open Lapilli. A short interactive tutorial appears automatically and walks through every rule — placing stones, winning with five in a row, capturing pairs, the rule variants, and online play. It takes about three minutes and you can bring it back any time from <strong>Settings → Show Tutorial</strong>.</p>
+  <p>Then play! Start with a game against the computer on <strong>Beginner</strong> (the gear icon opens Settings, where you pick your opponent), and work up from there.</p>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="whattotest">7. What to test</h2>
+  <p>Play however feels natural — the most valuable thing you can do is simply use the app and notice when something surprises, confuses, or annoys you. If you want a checklist, here's where fresh eyes help most:</p>
+
+  <h3>The tutorial</h3>
+  <ul>
+    <li>Did any step confuse you? Could you play after finishing it?</li>
+    <li>Is anything explained in the wrong order, or not at all?</li>
+  </ul>
+
+  <h3>Playing the game</h3>
+  <ul>
+    <li>Play the computer at all three difficulty levels. Does Beginner feel beatable? Does Advanced put up a real fight? Does the computer ever do something obviously stupid?</li>
+    <li>Try the <strong>Hint</strong> button when stuck. Is the suggestion sensible?</li>
+    <li>Do your taps land where you meant? (Especially on iPhone — stones are small.)</li>
+    <li>Use <strong>Undo</strong>. Does the game rewind the way you'd expect?</li>
+    <li>Try a two-player game with someone beside you, passing the device.</li>
+    <li>Try the other rule variants in Settings (Keryo, Tournament) after reading their tutorial pages.</li>
+  </ul>
+
+  <h3>Online play</h3>
+  <ul>
+    <li>Start an online game with me: Settings → Opponent → <strong>Online</strong> → Play Online → <strong>Invite Friends</strong>.</li>
+    <li>Notice the <strong>Send Move</strong> button: your move isn't final until you send it. Try placing a stone, undoing it, placing it somewhere else, then sending.</li>
+    <li>While waiting for your opponent, try <strong>Play Solo While Waiting</strong> in Settings — then jump back to the match when the banner appears.</li>
+    <li>Set the <strong>Move Time Limit</strong> slider before starting a game and tell me if the pacing makes sense.</li>
+  </ul>
+
+  <h3>Look and sound</h3>
+  <ul>
+    <li>Rotate your device. Does the layout still look right in both directions? Anything cut off, overlapping, or oddly placed?</li>
+    <li>Try the sound toggles in Settings — music, nature sounds, effects. Anything grating or too loud/quiet?</li>
+    <li>Watch the animations when placing stones and capturing. Smooth? Distracting?</li>
+  </ul>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="reporting">8. How to report problems, questions, and ideas</h2>
+  <p>Everything is welcome — bugs, confusion, wishes, complaints about the bird sounds. Small observations included; "this felt weird" is a useful report.</p>
+
+  <h3>The best way: through TestFlight</h3>
+  <p><span class="device-tag">iPhone / iPad</span><br>
+  While you're in Lapilli, <strong>take a screenshot</strong> (press the side button and volume-up together). Tap the little preview in the corner, and you'll see a <strong>Share Beta Feedback</strong> option — it sends the picture straight to me with your comments attached. You can even draw on the screenshot to circle the problem.</p>
+  <p>Or: open <strong>TestFlight</strong>, tap Lapilli Stones, and tap <strong>Send Beta Feedback</strong>.</p>
+  <p><span class="device-tag">Mac</span><br>
+  Open <strong>TestFlight</strong>, select Lapilli Stones, and click <strong>Send Beta Feedback</strong>. Attach a screenshot if you can (press <code>Shift-Command-3</code> to take one).</p>
+
+  <h3>If the app crashes</h3>
+  <p>TestFlight will notice and offer to send the crash to me automatically, with a box for you to say what you were doing. Please write even one sentence — "I had just captured a pair and hit Undo" turns a mystery into a fix.</p>
+
+  <h3>Or just email</h3>
+  <p><a href="mailto:lapilli-stones@proton.me">lapilli-stones@proton.me</a> — for anything, any time, in any format.</p>
+
+  <h3>What a great report looks like</h3>
+  <div class="callout">
+    <p>1. What you did &nbsp;2. What you expected &nbsp;3. What actually happened. <br>
+    <em>"I tapped Play Online, expected something to open, and nothing happened at all"</em> is a genuinely excellent bug report. (It's also a real one — a tester's report exactly like it caught one of our best bugs.)</p>
+  </div>
+  <a class="top" href="#top">↑ back to top</a>
+
+  <h2 id="troubleshooting">9. If something's not working</h2>
+  <ul>
+    <li><strong>No invitation email?</strong> Check spam, and double-check with me that the email you sent is the one on your Apple Account.</li>
+    <li><strong>"View in TestFlight" says the beta isn't available?</strong> Make sure you're opening the link on the device you want to play on, with TestFlight already installed, and that you're signed in with the same Apple Account the invite went to.</li>
+    <li><strong>Play Online does nothing, or complains about Game Center?</strong> Sign in to Game Center (see <a href="#gamecenter">Step 4</a>), then quit and reopen Lapilli.</li>
+    <li><strong>TestFlight says the build "expired"?</strong> Test versions last 90 days. Open TestFlight and install the newest version — there will almost certainly be one.</li>
+    <li><strong>Anything else:</strong> email me. Nothing you can do is a silly question — every question tells me where the app needs to be clearer.</li>
+  </ul>
+
+  <p style="margin-top:3rem; font-style:italic; color:var(--gold-lt);">Thank you. Genuinely. Every game you play makes this one better.<br>— Eddie</p>
+  <a class="top" href="#top">↑ back to top</a>
+
+</div>
+</body>
+</html>
