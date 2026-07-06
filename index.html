@@ -229,6 +229,50 @@
       font-size: 0.95rem;
     }
 
+    /* ── Features ── */
+    .features {
+      margin: 4rem 0 0;
+      text-align: center;
+    }
+    .features h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .features .subtitle {
+      font-style: italic;
+      color: var(--gold-lt);
+      opacity: 0.7;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      text-align: left;
+    }
+    .feature-card {
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 1.2rem 1.5rem;
+      background: rgba(201, 168, 76, 0.04);
+    }
+    .feature-card h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #bbb0a0;
+      margin: 0;
+    }
+
     /* ── App download callout ── */
     .app-callout {
       text-align: center;
@@ -307,6 +351,7 @@
 
     @media (max-width: 600px) {
       .win-conditions { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
       .how-to-play { padding: 2rem 1.2rem; }
     }
   </style>
@@ -444,6 +489,38 @@
       <h3>Variants</h3>
       <p><strong style="color: var(--gold-lt);">Keryo-Lapilli:</strong> Captures extend to triplets as well as pairs. The capture-victory threshold rises to fifteen stones. Proposed by champion Rollie Tesh in 1983 to reward more aggressive and tactical play.</p>
       <p><strong style="color: var(--gold-lt);">Tournament (Pro) Rules:</strong> The first player's second stone must be placed outside the inner 5×5 zone. Reduces the first-player advantage at high levels of play.</p>
+    </div>
+
+    <!-- ══════════════════ FEATURES ══════════════════ -->
+    <div class="features">
+      <h2>The Game, In Your Hands</h2>
+      <p class="subtitle">Everything in one purchase — no ads, no subscriptions, no tracking</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>Three Ways to Play</h4>
+          <p>Face a friend on the same board, challenge the computer at three levels of strength, or play "by mail" over Game Center — moves travel across the world while each player takes their turn in their own time.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Three Rule Variants</h4>
+          <p>Classic Lapilli, Keryo-Lapilli with its triplet captures, and Tournament rules that temper the first-player advantage. All included; switch freely.</p>
+        </div>
+        <div class="feature-card">
+          <h4>A Worthy Opponent</h4>
+          <p>The computer plays a genuine searching game — from a forgiving beginner to an advanced opponent that reads the board several moves deep. A hint button lends you its eyes when you need them.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Made by Hand</h4>
+          <p>A painted wooden board and forty individually crafted glass stones — no two games ever look alike. Every sound is synthesized from scratch: lyre strings, wind through poplars, birdsong.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Learn as You Play</h4>
+          <p>An interactive tutorial walks through every rule, variant, and online feature — from your first stone to your first capture.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Yours, Everywhere</h4>
+          <p>One purchase covers Mac, iPad, and iPhone. Solo play works entirely offline, and your game is always saved exactly where you left it.</p>
+        </div>
+      </div>
     </div>
 
     <!-- ══════════════════ APP DOWNLOAD ══════════════════ -->
