@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+# The tester guide and the book's reader shelf are for people who were
+# given the link, not for search results.
+Disallow: /testers.html
+Disallow: /book/
+
+Sitemap: https://lapilli-stones.com/sitemap.xml
