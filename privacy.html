@@ -39,9 +39,33 @@
     p { margin-bottom: 1rem; color: #ddd0bc; }
     a { color: var(--gold); }
     .footer { margin-top: 3rem; font-size: 0.85rem; opacity: 0.6; }
+    .topnav {
+      display: flex; flex-wrap: wrap; align-items: baseline;
+      column-gap: 1.1rem; row-gap: 0.2rem;
+      padding-bottom: 0.9rem; margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+      font-size: 0.9rem;
+    }
+    .topnav .brand {
+      margin-right: auto; text-decoration: none; border-bottom: none;
+      font-family: Georgia, serif; text-transform: uppercase;
+      letter-spacing: 0.14em; font-size: 0.8rem;
+      color: var(--gold-lt);
+    }
+    .topnav a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201, 168, 76, 0.35); }
+    .topnav a:hover { border-bottom-color: var(--gold); }
+    .topnav .brand:hover { border-bottom: none; }
+    .topnav .here { color: #ddd0bc; opacity: 0.7; }
   </style>
 </head>
 <body>
+  <nav class="topnav">
+    <a class="brand" href="index.html">Lapilli Stones</a>
+    <a href="manual.html">Manual</a>
+    <a href="opponents.html">The Opponents</a>
+    <a href="roadmap.html">What's Coming</a>
+    <a href="support.html">Support</a>
+  </nav>
   <h1>Lapilli Stones — Privacy Policy</h1>
   <p class="updated">Effective July 2026</p>
 

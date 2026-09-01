@@ -493,9 +493,23 @@
       .feature-grid { grid-template-columns: 1fr; }
       .how-to-play { padding: 2rem 1.2rem; }
     }
+    .topnav {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      column-gap: 1.6rem; row-gap: 0.3rem;
+      padding: 1.2rem 1.5rem 0;
+      font-size: 0.85rem; letter-spacing: 0.06em;
+    }
+    .topnav a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201, 168, 76, 0.35); opacity: 0.85; }
+    .topnav a:hover { border-bottom-color: var(--gold); opacity: 1; }
   </style>
 </head>
 <body>
+  <nav class="topnav">
+    <a href="manual.html">Manual</a>
+    <a href="opponents.html">The Opponents</a>
+    <a href="roadmap.html">What's Coming</a>
+    <a href="support.html">Support</a>
+  </nav>
 
   <!-- ══════════════════ HERO ══════════════════ -->
   <header class="hero">
