@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="The Lapilli Stones user manual: every screen and what it does — playing, hints that explain themselves, walking back through your games, the practice board, and the Mirror.">
+  <link rel="canonical" href="https://lapilli-stones.com/manual.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Lapilli Stones">
+  <meta property="og:title" content="Lapilli Stones — User Manual">
+  <meta property="og:description" content="The Lapilli Stones user manual: every screen and what it does — playing, hints that explain themselves, walking back through your games, the practice board, and the Mirror.">
+  <meta property="og:url" content="https://lapilli-stones.com/manual.html">
+  <meta property="og:image" content="https://lapilli-stones.com/share-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Lapilli Stones — glass stones on a carved Roman board, with Vesuvius beyond">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lapilli Stones — User Manual">
+  <meta name="twitter:description" content="The Lapilli Stones user manual: every screen and what it does — playing, hints that explain themselves, walking back through your games, the practice board, and the Mirror.">
+  <meta name="twitter:image" content="https://lapilli-stones.com/share-card.jpg">
+  <title>Lapilli Stones — User Manual</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #c9a84c; --gold-lt: #e8d5a3; --stone: #1a1510; --cream: #f5efe0;
+    }
+    body {
+      background: var(--stone); color: var(--cream);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem; line-height: 1.8;
+      max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem;
+    }
+    h1 { font-family: Georgia, serif; color: var(--gold-lt); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+    .tagline { color: var(--gold); opacity: 0.6; font-size: 0.85rem; margin-bottom: 2.5rem; }
+    h2 {
+      color: var(--gold); font-size: 1.15rem;
+      margin: 2.5rem 0 0.5rem; letter-spacing: 0.05em;
+    }
+    p { margin-bottom: 1rem; color: #ddd0bc; }
+    a { color: var(--gold); }
+    ul { list-style: none; margin: 0 0 1.5rem; }
+    li {
+      color: #ddd0bc; margin-bottom: 0.9rem; padding-left: 1.5rem;
+      position: relative;
+    }
+    li::before {
+      content: "·"; position: absolute; left: 0.4rem;
+      color: var(--gold); font-size: 1.3rem; line-height: 1.4;
+    }
+    li strong { color: var(--gold-lt); font-weight: normal; }
+    .note {
+      border-left: 3px solid var(--gold);
+      padding: 0.8rem 1.4rem; margin: 2.5rem 0;
+      background: rgba(201, 168, 76, 0.05);
+      font-style: italic; color: #ccc0aa; font-size: 1rem;
+    }
+    .toc { margin-bottom: 2rem; }
+    .toc li { margin-bottom: 0.3rem; }
+    .toc a { text-decoration: none; border-bottom: 1px solid rgba(201, 168, 76, 0.4); }
+    .toc a:hover { border-bottom-color: var(--gold); }
+    figure { margin: 1.4rem auto 2rem; text-align: center; }
+    figure img {
+      width: 290px; max-width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(201, 168, 76, 0.25);
+    }
+    figcaption {
+      font-size: 0.85rem; color: var(--gold); opacity: 0.65;
+      margin-top: 0.6rem; line-height: 1.5;
+    }
+    .pair { display: flex; gap: 1.4rem; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+    .pair figure { margin: 1.4rem 0 2rem; }
+    .footer { margin-top: 3rem; font-size: 0.85rem; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <h1>User Manual</h1>
+  <p class="tagline">Every screen, and what it does</p>
+
+  <p>The game teaches its own rules — the in-app tutorial walks through all of them with stones moving on a demo board, and the companion book under Help goes as deep as anyone could want. This page is the reference for everything else: the buttons, the settings, and the study tools, with pictures. It reads top to bottom, but every section stands alone.</p>
+
+  <div class="note">
+    This manual describes the newest build now in testing. The Study tools — Your Games, the Practice Board, and the Mirror — arrive with the next TestFlight build; everything else is in the current one.
+  </div>
+
+  <ul class="toc">
+    <li><a href="#game-screen">The game screen</a></li>
+    <li><a href="#opponent">Choosing an opponent and rules</a></li>
+    <li><a href="#hints">Hints that explain themselves</a></li>
+    <li><a href="#your-games">Your Games — the walk-back</a></li>
+    <li><a href="#practice">The Practice Board</a></li>
+    <li><a href="#mirror">The Mirror</a></li>
+    <li><a href="#zoom">Zoom and pan on the phone</a></li>
+    <li><a href="#everything-else">Records, sound, appearance, online play</a></li>
+    <li><a href="#privacy">Where your games live</a></li>
+  </ul>
+
+  <h2 id="game-screen">The game screen</h2>
+  <figure>
+    <img src="screenshots/manual-game.jpg" alt="The main game screen: two score cards above the carved wooden board, a row of round control buttons below" loading="lazy">
+    <figcaption>The whole game on one screen: score cards, board, controls.</figcaption>
+  </figure>
+  <p>Each player has a card showing their captures out of the five pairs that win, and a small badge marks whose turn it is. Tap any intersection to place a stone. The row of buttons under the board (beside it, on a bigger screen):</p>
+  <ul>
+    <li><strong>Undo</strong> takes back your last move — and against the computer it takes back the reply too, so you can rethink without replaying.</li>
+    <li><strong>New Game</strong> clears the board and starts over. When a game has just ended, a <strong>Rematch</strong> button appears too — same opponent, move order swapped.</li>
+    <li><strong>Hint</strong> asks the computer what it would play and rings the answer on the board.</li>
+    <li><strong>Export</strong> saves the game as a small text file you can keep or send. Players are recorded by move order — first and second — so the file stays true whatever colors you play with.</li>
+    <li>The <strong>gear</strong> opens Settings, where nearly everything else in this manual lives.</li>
+  </ul>
+
+  <h2 id="opponent">Choosing an opponent and rules</h2>
+  <figure>
+    <img src="screenshots/manual-settings.jpg" alt="The Settings sheet: Opponent picker with Human, AI, and Online; the four difficulty tiers Novice, Apprentice, Journeyman, Artisan; the rules variants below" loading="lazy">
+    <figcaption>Opponent, tier, and rules — all on the first screen of Settings.</figcaption>
+  </figure>
+  <p>Settings opens on the Opponent section: pass-and-play with a <strong>Human</strong> beside you, the <strong>AI</strong>, or an <strong>Online</strong> match through Game Center. Against the AI you choose which color it plays and which rung of the workshop ladder you face — Novice, Apprentice, Journeyman, or Artisan, each described in a line under its name. The <a href="opponents.html">Opponents page</a> tells you who they are.</p>
+  <p>Below that, the rules: Standard, Keryo-Lapilli (triplet captures count too, first to fifteen stones), and the Tournament variants that restrict the first player's second stone. Changing opponent or rules mid-game asks before it discards the board.</p>
+
+  <h2 id="hints">Hints that explain themselves</h2>
+  <figure>
+    <img src="screenshots/manual-hint.jpg" alt="The game screen with a dashed golden ring on the suggested square and a caption reading: Nothing is forced here. This builds shape and keeps the initiative." loading="lazy">
+    <figcaption>With Explain Hints on, the ring gets a reason.</figcaption>
+  </figure>
+  <p>The Hint button always rings a square. Turn on <strong>Explain Hints</strong> — in the Study section of Settings — and each hint also says <em>why</em>, in one line of the language the companion book teaches: this wins outright, this blocks a loss, this answers an open three, this threatens a capture, or nothing is forced and this builds shape. It's off by default; the ring alone is there for players who just want a nudge.</p>
+
+  <figure>
+    <img src="screenshots/manual-study.jpg" alt="The Study section of Settings: Your Games, Practice Board, The Mirror, and the Explain Hints toggle" loading="lazy">
+    <figcaption>The Study section of Settings — the next three chapters live here.</figcaption>
+  </figure>
+
+  <h2 id="your-games">Your Games — the walk-back</h2>
+  <p>Every game you finish is recorded on your device, automatically, from the day you installed the game. The Study section's <strong>Your Games</strong> is where they live: every finished game, newest first, with its date, length, and how it ended.</p>
+  <div class="pair">
+    <figure>
+      <img src="screenshots/manual-your-games.jpg" alt="The Your Games list: three finished games with dates, move counts, and outcomes" loading="lazy">
+      <figcaption>Every finished game, kept.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/manual-review.jpg" alt="The walk-back: a mid-game position with a ring on the reviewed move, the reading 'The opponent could win on the very next move; this takes that away', the Artisan's suggestion, and a move slider" loading="lazy">
+      <figcaption>Move 20 of 37, with the position's reading and the Artisan's opinion.</figcaption>
+    </figure>
+  </div>
+  <p>Open one and walk through it with the slider or the arrows. Under the board, every move carries a one-line reading: what it did, what it answered — and, honestly, where a threat demanded an answer that never came. <strong>Ask the Artisan</strong> and the strongest opponent thinks about the position for a few seconds and tells you what it would have played. Nothing is computed until you ask.</p>
+
+  <h2 id="practice">The Practice Board</h2>
+  <div class="pair">
+    <figure>
+      <img src="screenshots/manual-practice.jpg" alt="The Practice Board in Play mode with a book problem loaded, a dashed ring on the winning square, and the caption: The Artisan would play J10. This wins the game outright." loading="lazy">
+      <figcaption>A book problem on a real board, with the Artisan's explained answer.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/manual-problems.jpg" alt="The problems menu listing the book's Chapter 15 problems, the solved one marked with a checkmark" loading="lazy">
+      <figcaption>The book's fifteen problems. Solved ones wear a mark.</figcaption>
+    </figure>
+  </div>
+  <p>A free board with two bowls beside it, in the Study section. It has two modes, and the difference is the whole idea:</p>
+  <ul>
+    <li><strong>Setup</strong> — stones drop wherever you tap, for whichever color is selected, and nothing resolves. Arrange any position: something from a game, something from the book, something from your head.</li>
+    <li><strong>Play</strong> — the real rules take over. Captures fire, wins fire, exactly as in a game, but with a color selector instead of turn order, so you can play both sides of a line to see where it goes.</li>
+  </ul>
+  <p>The eraser removes any single stone. The note field keeps whatever you learned, and the whole board — position, note, and all — is exactly where you left it next time. The book menu in the corner opens any of the companion book's fifteen problems on the board; find a problem's published answer in Play mode and it's remembered with a checkmark. And <strong>Ask the Artisan</strong> works here too — on the Practice Board, the explanation always shows, because practice is where the vocabulary is learned.</p>
+
+  <h2 id="mirror">The Mirror</h2>
+  <figure>
+    <img src="screenshots/manual-mirror.jpg" alt="The Mirror: a line chart of mistake rates per hundred moves across games, a legend of three categories, and a list of flagged moves with explanations" loading="lazy">
+    <figcaption>Three kinds of mistake, charted oldest game to newest — this one is fading.</figcaption>
+  </figure>
+  <p>The Mirror reads back through every finished game against the AI on your device and charts the mistakes you repeat, as a rate per hundred of your own moves, oldest game to newest — so you can see whether they're fading as you improve. It counts exactly three things, and all of them are facts the record proves, never an engine's opinion:</p>
+  <ul>
+    <li><strong>Allowed the loss.</strong> A threat demanded an answer, none came, and the opponent won on the very next move.</li>
+    <li><strong>Let a threat grow.</strong> A threat demanded an answer, none came, and within three moves it had grown into a four.</li>
+    <li><strong>Missed a capture threat.</strong> A capture threat against the opponent's shapes was there for the taking, went unplayed, and was gone a move later.</li>
+  </ul>
+  <p>A threat you ignored that the opponent never punished is deliberately <em>not</em> counted. And every flagged move opens in the walk-back at that exact position, ring on the move, so you can judge the claim on the board yourself. The analysis runs entirely on your device and is cached, so the Mirror opens instantly after the first look.</p>
+
+  <h2 id="zoom">Zoom and pan on the phone</h2>
+  <p>Nineteen lines each way is a lot of board for a hand's width of glass. On iPhone and iPad, pinch to zoom into the part of the board where the fight is happening — stones become comfortably tappable — then drag with one finger to follow the action. Placing stones works the same while zoomed, and the fit button in the corner returns the whole board in one tap. Most players zoom in early and stay there. The Practice Board zooms the same way.</p>
+
+  <h2 id="everything-else">Records, sound, appearance, online play</h2>
+  <ul>
+    <li><strong>Record.</strong> Your wins and losses against every opponent, broken down by rule set and by whether you moved first or second — which is where most players discover their real weakness. Tallies travel between your devices through your own iCloud.</li>
+    <li><strong>Sound.</strong> Stone clicks, captures, and wins; an ambient lyre; poplar leaves and an occasional bird. Each has its own switch, and a volume slider covers them all.</li>
+    <li><strong>Boards and stones.</strong> Separate choices — play any stones on any board. Color is presentation only; saved games record players by move order, so changing your set never alters a stored game. High Contrast Stones adds an outline ring to every stone.</li>
+    <li><strong>Online play.</strong> Matches run through Game Center, a move at a time, with a time limit the starting player sets — seven days unless changed. While you wait, Play Solo While Waiting keeps a local game going without touching the match. Banners tell you when it's your move; Resign Match in Settings is the way to leave.</li>
+    <li><strong>The book and the tutorial.</strong> The full companion book — rules, strategy, and the legend — is under Help, with a contents menu and a memory for your place. The tutorial replays any time from the same section.</li>
+  </ul>
+
+  <h2 id="privacy">Where your games live</h2>
+  <p>On your device. Recorded games, practice positions, and the Mirror's analysis are files on your own machine, read by your own machine. Win/loss tallies sync between your devices through your own iCloud account; we run no servers and never see any of it. The full policy is one page: <a href="privacy.html">Privacy</a>.</p>
+
+  <div class="note">
+    Something unclear, or missing from this page? Write to <a href="mailto:lapilli-stones@proton.me">lapilli-stones@proton.me</a> — the manual, like the game, improves by letter.
+  </div>
+
+  <p class="footer"><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="support.html">Support</a> &nbsp;·&nbsp; Manual &nbsp;·&nbsp; <a href="press.html">Press</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="roadmap.html">What's Coming</a> &nbsp;·&nbsp; <a href="testers.html">Beta Testers</a><br>
+  <a href="index.html">Lapilli Stones</a> — the game that outlived a volcano.</p>
+</body>
+</html>
