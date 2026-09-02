@@ -21,6 +21,10 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://lapilli-stones.com/story.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://lapilli-stones.com/privacy.html</loc>
     <priority>0.3</priority>
   </url>

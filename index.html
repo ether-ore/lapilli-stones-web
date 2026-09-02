@@ -6,12 +6,12 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="description" content="A hand-crafted board game of five-in-a-row and capture — glass stones on a carved Roman board — for iPhone, iPad, and Mac. One purchase, no ads, no tracking.">
+  <meta name="description" content="Build a line. Break theirs. A hand-crafted board game of five-in-a-row and capture for iPhone, iPad, and Mac — four measured opponents, correspondence play, and a study of your own. One purchase, no ads, no tracking.">
   <link rel="canonical" href="https://lapilli-stones.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Lapilli Stones">
   <meta property="og:title" content="Lapilli Stones — The Ancient Game of Five and Capture">
-  <meta property="og:description" content="A hand-crafted board game of five-in-a-row and capture — glass stones on a carved Roman board — for iPhone, iPad, and Mac. One purchase, no ads, no tracking.">
+  <meta property="og:description" content="Build a line. Break theirs. A hand-crafted board game of five-in-a-row and capture for iPhone, iPad, and Mac. One purchase, no ads, no tracking.">
   <meta property="og:url" content="https://lapilli-stones.com/">
   <meta property="og:image" content="https://lapilli-stones.com/share-card.jpg">
   <meta property="og:image:width" content="1200">
@@ -19,773 +19,582 @@
   <meta property="og:image:alt" content="Lapilli Stones — glass stones on a carved Roman board, with Vesuvius beyond">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Lapilli Stones — The Ancient Game of Five and Capture">
-  <meta name="twitter:description" content="A hand-crafted board game of five-in-a-row and capture — glass stones on a carved Roman board — for iPhone, iPad, and Mac. One purchase, no ads, no tracking.">
+  <meta name="twitter:description" content="Build a line. Break theirs. A hand-crafted board game of five-in-a-row and capture for iPhone, iPad, and Mac. One purchase, no ads, no tracking.">
   <meta name="twitter:image" content="https://lapilli-stones.com/share-card.jpg">
   <title>Lapilli Stones — The Ancient Game of Five and Capture</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --gold:    #c9a84c;
-      --gold-lt: #e8d5a3;
-      --stone:   #1a1510;
-      --ink:     #2a2118;
-      --cream:   #f5efe0;
-      --rust:    #7a3b1e;
+      --gold: #c9a84c; --gold-lt: #e8d5a3; --stone: #1a1510;
+      --stone-2: #221c15; --cream: #f5efe0; --body-tx: #ddd0bc;
+    }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    body {
+      background: var(--stone); color: var(--cream);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem; line-height: 1.75;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold); outline-offset: 3px;
     }
 
-    body {
-      background-color: var(--stone);
-      color: var(--cream);
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.15rem;
-      line-height: 1.85;
+    /* ── Navigation ── */
+    nav.top {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; flex-wrap: wrap;
+      column-gap: 1.4rem; row-gap: 0.3rem;
+      padding: 0.75rem 1.4rem;
+      background: rgba(26,21,16,0.88);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      font-size: 0.85rem; letter-spacing: 0.05em;
+    }
+    nav.top .brand {
+      font-family: 'Cinzel', Georgia, serif; font-weight: 600;
+      letter-spacing: 0.16em; color: var(--gold-lt);
+      margin-right: auto; font-size: 0.85rem; text-decoration: none;
+    }
+    nav.top a { color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.35); }
+    nav.top a:hover { border-bottom-color: var(--gold); }
+    .btn {
+      display: inline-block; font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.85rem; letter-spacing: 0.1em;
+      padding: 0.62rem 1.35rem; border-radius: 2px;
+      background: var(--gold); color: #1a1510 !important;
+      text-decoration: none; border-bottom: none !important;
+      font-weight: 600;
+    }
+    .btn:hover { background: var(--gold-lt); }
+    .btn.ghost { background: transparent; color: var(--gold) !important;
+      border: 1px solid rgba(201,168,76,0.5); font-weight: 400; }
+    .btn.ghost:hover { border-color: var(--gold); background: rgba(201,168,76,0.07); }
+    @media (max-width: 640px) {
+      /* One clean line on phones: brand and the action. The pages
+         stay reachable through the sections and the footer. */
+      nav.top a:not(.brand):not(.btn) { display: none; }
     }
 
     /* ── Hero ── */
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      background:
-        linear-gradient(to bottom, rgba(10,8,5,0.55) 0%, rgba(10,8,5,0.85) 100%),
-        url('images/vesuvius.png') center / cover no-repeat;
-      border-bottom: 3px solid var(--gold);
+    header.hero {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: center; gap: 3rem 4.5rem;
+      padding: 4.2rem 1.5rem 4.6rem;
+      max-width: 1120px; margin: 0 auto;
     }
-    .hero-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.35em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
+    .hero-copy { max-width: 480px; }
+    .eyebrow {
+      font-family: 'Cinzel', Georgia, serif; font-size: 0.7rem;
+      letter-spacing: 0.3em; color: var(--gold);
+      text-transform: uppercase; margin: 0 0 1.3rem;
     }
-    .hero h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 700;
-      color: var(--gold-lt);
-      letter-spacing: 0.08em;
-      line-height: 1.1;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.8);
+    .hero-copy h1 {
+      font-family: 'Cinzel', Georgia, serif; font-weight: 700;
+      font-size: clamp(2.6rem, 5.5vw, 3.9rem); line-height: 1.06;
+      letter-spacing: 0.03em; color: var(--cream); margin: 0 0 1.2rem;
+      text-wrap: balance;
     }
-    .hero-sub {
-      margin-top: 1.2rem;
-      font-style: italic;
-      font-size: 1.3rem;
-      color: var(--gold-lt);
-      opacity: 0.85;
+    .hero-copy h1 em {
+      display: block; font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; color: var(--gold-lt);
     }
-    .hero-rule {
-      width: 80px;
-      height: 2px;
-      background: var(--gold);
-      margin: 2rem auto;
-      opacity: 0.6;
+    .hero-sub { font-size: 1.18rem; color: var(--body-tx);
+      margin: 0 0 1.7rem; max-width: 42ch; }
+    .cta-row { display: flex; gap: 0.9rem; flex-wrap: wrap; align-items: center; }
+    .status { margin: 1.3rem 0 0; font-size: 0.92rem; color: var(--body-tx); }
+    .status .dot { color: #79b356; }
+    .composite { position: relative; width: min(600px, 88vw); margin-bottom: 1.5rem; }
+    .composite .mac {
+      display: block; width: 100%; height: auto; border-radius: 10px;
+      border: 1px solid rgba(201,168,76,0.35);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.75);
     }
-    .hero-date {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      opacity: 0.7;
+    .composite .iph {
+      position: absolute; width: 26%; height: auto; bottom: -10%; left: -5%;
+      border-radius: 14px; border: 2px solid rgba(201,168,76,0.5);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.85);
+    }
+    @media (max-width: 720px) { .composite { margin-left: 5%; } }
+
+    /* ── Proof and stats ── */
+    .proof {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.6rem 2.4rem; padding: 1.05rem 1.5rem;
+      border-top: 1px solid rgba(201,168,76,0.18);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+      background: var(--stone-2);
+      font-family: 'Cinzel', Georgia, serif; font-size: 0.72rem;
+      letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase;
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem; max-width: 880px; margin: 0 auto;
+      padding: 2.6rem 1.5rem 0;
+    }
+    .stat b {
+      display: block; font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.5rem; color: var(--gold-lt); font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .stat span { font-size: 0.95rem; color: var(--body-tx); }
+
+    /* ── Sections ── */
+    section { max-width: 880px; margin: 0 auto; padding: 3.4rem 1.5rem 0.5rem; }
+    .kicker {
+      font-family: 'Cinzel', Georgia, serif; font-size: 0.7rem;
+      letter-spacing: 0.28em; color: var(--gold);
+      text-transform: uppercase; margin: 0 0 0.7rem;
+    }
+    section h2 {
+      font-family: 'Cinzel', Georgia, serif; font-size: 1.7rem;
+      letter-spacing: 0.05em; color: var(--cream); margin: 0 0 0.4rem;
+      line-height: 1.25; text-wrap: balance;
+    }
+    section h2 em {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; color: var(--gold-lt);
+    }
+    .sub { color: var(--body-tx); margin: 0 0 1.9rem; max-width: 60ch; }
+    section p { color: var(--body-tx); }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.4rem; align-items: stretch;
+    }
+    .step {
+      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(201,168,76,0.04); padding: 1.25rem 1.35rem;
+      display: flex; flex-direction: column;
+    }
+    .num {
+      font-family: 'Cinzel', Georgia, serif; color: var(--gold);
+      font-size: 0.85rem; letter-spacing: 0.15em; display: block;
+      margin-bottom: 0.45rem;
+    }
+    .step h3, .card h3 {
+      font-family: 'Cinzel', Georgia, serif; font-size: 1rem;
+      letter-spacing: 0.07em; color: var(--gold-lt); margin: 0 0 0.5rem;
+    }
+    .step p, .card p { font-size: 0.98rem; margin: 0; }
+    .capdemo { display: block; width: 190px;
+      margin: 0.95rem auto 0; margin-top: auto; padding-top: 0.95rem; }
+    .after {
+      margin-top: 1.6rem; font-style: italic; font-size: 1.15rem;
+      color: var(--gold-lt); text-align: center;
     }
 
-    /* ── Content wrapper ── */
-    .content {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    .cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.4rem;
+    }
+    .card {
+      border: 1px solid rgba(201,168,76,0.25); padding: 1.3rem 1.4rem;
+      background: rgba(255,255,255,0.025);
+    }
+    .card a, .more { color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.4); }
+    .card a:hover, .more:hover { border-bottom-color: var(--gold); }
+    .more { display: inline-block; margin-top: 1.4rem; }
+
+    .ladder { display: grid; gap: 0; border: 1px solid rgba(201,168,76,0.25); }
+    .rung { display: flex; gap: 1.3rem; align-items: baseline; padding: 1.05rem 1.4rem; }
+    .rung + .rung { border-top: 1px solid rgba(201,168,76,0.16); }
+    .rung .rn { font-family: 'Cinzel', Georgia, serif; color: var(--gold);
+      width: 2rem; font-size: 1.05rem; flex-shrink: 0; }
+    .rung .name { font-family: 'Cinzel', Georgia, serif; color: var(--gold-lt);
+      width: 8.5rem; letter-spacing: 0.05em; flex-shrink: 0; }
+    .rung .line { color: var(--body-tx); font-size: 1rem; font-style: italic; }
+    @media (max-width: 540px) {
+      .rung { flex-wrap: wrap; row-gap: 0.15rem; }
+      .rung .line { flex-basis: 100%; }
     }
 
-    /* ── Section divider ── */
-    .divider {
-      text-align: center;
-      margin: 2rem 0 1.4rem;
-      color: var(--gold);
-      opacity: 0.5;
-      font-size: 1.4rem;
-      letter-spacing: 0.5em;
+    .loop {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.6rem;
     }
+    .loop figure { margin: 0; text-align: center; }
+    .loop img {
+      width: 100%; max-width: 240px; height: auto; border-radius: 14px;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+    .loop figcaption {
+      font-size: 0.85rem; color: var(--gold); opacity: 0.78;
+      margin-top: 0.55rem; line-height: 1.45;
+    }
+    .book {
+      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(201,168,76,0.05); padding: 1.3rem 1.5rem;
+      margin-top: 1.7rem;
+    }
+    .book h3 {
+      font-family: 'Cinzel', Georgia, serif; color: var(--gold-lt);
+      margin: 0 0 0.4rem; font-size: 1.05rem; letter-spacing: 0.05em;
+    }
+    .book p { margin: 0; font-size: 1rem; }
 
-    /* ── Story sections ── */
-    .story-section {
-      padding: 1.8rem 0;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-    }
-    .story-section:last-of-type { border-bottom: none; }
-
-    .story-section p {
-      margin-bottom: 1.4em;
-      color: #ddd0bc;
-    }
-    .story-section p:last-child { margin-bottom: 0; }
-
-    em { color: var(--gold-lt); font-style: italic; }
-
-    /* ── Full-bleed mosaic images ── */
-    .mosaic-image {
-      width: 100%;
-      max-width: 900px;
-      margin: 2rem auto;
-      display: block;
-      border: 3px solid rgba(201, 168, 76, 0.4);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.7);
-    }
-    .mosaic-caption {
-      text-align: center;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      opacity: 0.55;
-      margin-top: -1.4rem;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-    }
-
-    /* ── Pull quote ── */
-    .pull-quote {
-      border-left: 3px solid var(--gold);
-      margin: 2.5rem 0;
-      padding: 1rem 2rem;
-      background: rgba(201, 168, 76, 0.05);
-    }
-    .pull-quote p {
-      font-size: 1.25rem;
-      font-style: italic;
-      color: var(--gold-lt) !important;
-      margin: 0 !important;
-    }
-
-    /* ── How to Play ── */
-    .how-to-play {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(201, 168, 76, 0.25);
-      border-radius: 2px;
-      padding: 2.4rem 2.5rem;
-      margin: 2.4rem 0;
-    }
-    .how-to-play h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
-    }
-    .how-to-play .subtitle {
-      font-style: italic;
-      color: var(--gold-lt);
-      opacity: 0.7;
-      margin-bottom: 2rem;
-      font-size: 1rem;
-    }
-    .how-to-play h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin: 2rem 0 0.6rem;
-    }
-    .how-to-play p {
-      color: #ccc0aa;
-      margin-bottom: 1.2em;
-    }
-    .win-conditions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .win-card {
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      padding: 1.2rem 1.5rem;
-      background: rgba(201, 168, 76, 0.04);
-    }
-    .win-card .win-number {
-      font-family: 'Cinzel', serif;
-      font-size: 2.5rem;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .win-card p {
-      font-size: 0.95rem;
-      color: #bbb0a0;
-      margin: 0;
-    }
-    .capture-example {
-      font-family: 'Cinzel', serif;
-      text-align: center;
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      color: var(--gold-lt);
-      background: rgba(0,0,0,0.3);
-      padding: 1rem;
-      margin: 1rem 0;
-      border: 1px solid rgba(201,168,76,0.2);
-    }
-    .vocab-grid {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.5rem 1.5rem;
-      margin: 1rem 0;
-      align-items: baseline;
-    }
-    .vocab-term {
-      font-family: 'Cinzel', serif;
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      white-space: nowrap;
-    }
-    .vocab-def {
-      color: #bbb0a0;
-      font-size: 0.95rem;
-    }
-
-    /* ── Features ── */
-    .features {
-      margin: 2.4rem 0 0;
-      text-align: center;
-    }
-    .features h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
-    }
-    .features .subtitle {
-      font-style: italic;
-      color: var(--gold-lt);
-      opacity: 0.7;
-      margin-bottom: 2rem;
-      font-size: 1rem;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      text-align: left;
-    }
-    .feature-card {
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      padding: 1.2rem 1.5rem;
-      background: rgba(201, 168, 76, 0.04);
-    }
-    .feature-card h4 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .feature-card a {
-      color: var(--gold);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.4);
-    }
-    .feature-card a:hover { border-bottom-color: var(--gold); }
-    .feature-card p {
-      font-size: 0.95rem;
-      color: #bbb0a0;
-      margin: 0;
-    }
-
-    /* ── Screenshots gallery ── */
-    .gallery { margin: 2.4rem 0 0; text-align: center; }
-    .gallery h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
-    }
-    .gallery .subtitle {
-      font-style: italic;
-      color: var(--gold-lt);
-      opacity: 0.7;
-      margin-bottom: 2rem;
-      font-size: 1rem;
-    }
+    /* ── Gallery (device tabs) ── */
+    .gallery { text-align: center; }
     .device-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 0.8rem;
+      margin-bottom: 2rem; flex-wrap: wrap;
     }
     .device-tab {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.5rem 1.6rem;
-      background: transparent;
-      color: var(--gold);
+      font-family: 'Cinzel', serif; font-size: 0.8rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.7rem 1.6rem; min-height: 44px;
+      background: transparent; color: var(--gold);
       border: 1px solid rgba(201, 168, 76, 0.5);
-      cursor: pointer;
-      transition: all 0.2s;
+      cursor: pointer; transition: all 0.2s;
     }
     .device-tab:hover { border-color: var(--gold); }
-    .device-tab.active {
-      background: var(--gold);
-      color: var(--stone);
-      border-color: var(--gold);
+    .device-tab[aria-selected="true"] {
+      background: var(--gold); color: var(--stone); border-color: var(--gold);
     }
     .gallery-viewport { position: relative; }
     .shot-strip {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
+      display: flex; overflow-x: auto;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
     }
     .shot-strip::-webkit-scrollbar { display: none; }
     .shot-strip.hidden { display: none; }
     .shot-slide {
-      flex: 0 0 100%;
-      scroll-snap-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 0.5rem;
-      margin: 0;
+      flex: 0 0 100%; scroll-snap-align: center;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; padding: 0 0.5rem; margin: 0;
     }
     .shot-slide img {
-      max-width: 100%;
-      max-height: 72vh;
-      width: auto;
-      height: auto;
+      max-width: 100%; max-height: 72vh; width: auto; height: auto;
       border: 3px solid rgba(201, 168, 76, 0.4);
       box-shadow: 0 8px 40px rgba(0,0,0,0.7);
     }
     .shot-slide figcaption {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      opacity: 0.55;
-      text-transform: uppercase;
-      margin-top: 1rem;
+      font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.2em; color: var(--gold); opacity: 0.55;
+      text-transform: uppercase; margin-top: 1rem;
     }
     .gallery-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(26, 21, 16, 0.75);
-      color: var(--gold);
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(26, 21, 16, 0.75); color: var(--gold);
       border: 1px solid rgba(201, 168, 76, 0.5);
-      font-size: 1.5rem;
-      line-height: 1;
-      width: 2.6rem;
-      height: 2.6rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: Georgia, serif;
+      font-size: 1.5rem; line-height: 1;
+      width: 2.8rem; height: 2.8rem; cursor: pointer;
+      transition: all 0.2s; font-family: Georgia, serif;
     }
     .gallery-arrow:hover { background: var(--gold); color: var(--stone); }
     .gallery-arrow.prev { left: 0.4rem; }
     .gallery-arrow.next { right: 0.4rem; }
     .gallery-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-top: 1.2rem;
+      display: flex; justify-content: center; gap: 0.4rem; margin-top: 1rem;
     }
     .gallery-dots button {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      background: transparent;
-      cursor: pointer;
-      padding: 0;
-      opacity: 0.5;
-      transition: all 0.2s;
+      /* A 12px dot inside a 44px-minimum touch target. */
+      width: 44px; height: 44px; padding: 0;
+      background: transparent; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
     }
-    .gallery-dots button.active { background: var(--gold); opacity: 1; }
+    .gallery-dots button::before {
+      content: ""; width: 12px; height: 12px; border-radius: 50%;
+      border: 1px solid var(--gold); opacity: 0.5; transition: all 0.2s;
+    }
+    .gallery-dots button.active::before { background: var(--gold); opacity: 1; }
 
-    /* ── App download callout ── */
-    .app-callout {
-      text-align: center;
-      margin: 3rem 0 2rem;
-      padding: 2.6rem 2rem;
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      background: rgba(201, 168, 76, 0.03);
+    /* ── Legend teaser and finale ── */
+    .legend {
+      border-left: 3px solid var(--gold);
+      background: rgba(201,168,76,0.05); padding: 1.5rem 1.9rem;
     }
-    .app-callout .eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.35em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .app-callout h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 2rem;
-      color: var(--gold-lt);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.8rem;
-    }
-    .app-callout .platforms {
-      font-style: italic;
-      color: var(--gold-lt);
-      opacity: 0.75;
-      margin-bottom: 2rem;
-    }
-    .app-callout .app-store-btn {
-      display: inline-block;
-      padding: 0.85rem 2.4rem;
-      background: var(--gold);
-      color: var(--stone);
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 2px solid var(--gold);
-      transition: opacity 0.2s;
-    }
-    .app-callout .app-store-btn:hover { opacity: 0.85; }
-    .app-callout .app-store-btn.coming-soon {
-      background: transparent;
-      color: var(--gold);
-      cursor: default;
-      opacity: 0.75;
-    }
+    .legend p { font-size: 1.12rem; color: var(--cream); }
+    .legend .fine { font-size: 0.98rem; color: var(--body-tx); font-style: italic; }
+    .legend .cta-row { margin-top: 1rem; }
+    .finale { text-align: center; padding-bottom: 1.5rem; }
+    .finale .sub { margin-left: auto; margin-right: auto; }
+    .finale .fine { font-size: 0.9rem; color: var(--body-tx); opacity: 0.7;
+      margin-top: 0.7rem; }
 
     /* ── Footer ── */
     footer {
-      text-align: center;
-      padding: 4rem 2rem;
-      border-top: 1px solid rgba(201, 168, 76, 0.2);
-      margin-top: 4rem;
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.2); margin-top: 4rem;
     }
     footer .footer-logo {
-      font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      margin-bottom: 0.5rem;
+      font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold);
+      letter-spacing: 0.2em; margin-bottom: 0.5rem;
     }
-    footer p {
-      font-size: 0.85rem;
-      color: rgba(201, 168, 76, 0.4);
-      letter-spacing: 0.1em;
-    }
-    footer a {
-      color: var(--gold);
-      opacity: 0.6;
-      text-decoration: none;
-    }
+    footer p { font-size: 0.85rem; color: rgba(201, 168, 76, 0.4);
+      letter-spacing: 0.1em; }
+    footer a { color: var(--gold); opacity: 0.6; text-decoration: none; }
     footer a:hover { opacity: 1; }
 
-    @media (max-width: 600px) {
-      .win-conditions { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .how-to-play { padding: 2rem 1.2rem; }
+    /* ── The three little demos ── */
+    @keyframes drop { 0%, 55% { opacity: 0; transform: scale(0.2); }
+      65%, 100% { opacity: 1; transform: scale(1); } }
+    @keyframes taken { 0%, 70% { opacity: 1; } 85%, 100% { opacity: 0; } }
+    @keyframes strike { 0%, 68% { stroke-dashoffset: 100; }
+      86%, 100% { stroke-dashoffset: 0; } }
+    @keyframes beckon { 0%, 70% { opacity: 0; } 85%, 100% { opacity: 0.9; } }
+    .capdemo .placer { animation: drop 4s ease-out infinite;
+      transform-origin: center; transform-box: fill-box; }
+    .capdemo .victim { animation: taken 4s ease-in infinite; }
+    .capdemo .winline { stroke-dasharray: 100; stroke-dashoffset: 100;
+      animation: strike 4s ease-out infinite; }
+    .capdemo .endmark { opacity: 0; animation: beckon 4s ease-in infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .capdemo .placer, .capdemo .victim, .capdemo .winline,
+      .capdemo .endmark { animation: none; }
+      .capdemo .victim { opacity: 0.35; }
+      .capdemo .winline { stroke-dashoffset: 0; }
+      .capdemo .endmark { opacity: 0.9; }
     }
-    .topnav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; flex-wrap: wrap; justify-content: center;
-      column-gap: 1.6rem; row-gap: 0.3rem;
-      padding: 0.9rem 1.5rem;
-      font-size: 0.85rem; letter-spacing: 0.06em;
-      background: rgba(26, 21, 16, 0.82);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-    }
-    .topnav a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201, 168, 76, 0.35); opacity: 0.85; }
-    .topnav a:hover { border-bottom-color: var(--gold); opacity: 1; }
   </style>
 </head>
 <body>
-  <nav class="topnav">
-    <a href="manual.html">Manual</a>
-    <a href="opponents.html">The Opponents</a>
-    <a href="roadmap.html">What's Coming</a>
-    <a href="support.html">Support</a>
+
+  <nav class="top">
+    <a class="brand" href="#top">LAPILLI STONES</a>
+    <a href="#play">How It Plays</a>
+    <a href="#guild">Opponents</a>
+    <a href="#study">Study</a>
+    <a href="story.html">Story</a>
+    <a class="btn" href="https://testflight.apple.com/join/K7HAw4PP">Join the Beta</a>
   </nav>
 
-  <!-- ══════════════════ HERO ══════════════════ -->
-  <header class="hero">
-    <p class="hero-eyebrow">Pompeii · 79 AD</p>
-    <h1>LAPILLI STONES</h1>
-    <p class="hero-sub">The ancient game of five and capture</p>
-    <div class="hero-rule"></div>
-    <p class="hero-date">Buried by Vesuvius &nbsp;·&nbsp; Rediscovered by the world</p>
+  <header class="hero" id="top">
+    <div class="hero-copy">
+      <p class="eyebrow">A modern strategy game · An original Roman legend</p>
+      <h1>Build a line. <em>Break theirs.</em></h1>
+      <p class="hero-sub">Place five stones in a row — or capture five enemy pairs before they can. Every move builds a threat. Every pair can become a trap.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://testflight.apple.com/join/K7HAw4PP">Join the public beta</a>
+        <a class="btn ghost" href="#play">See how it plays ↓</a>
+      </div>
+      <p class="status"><span class="dot">●</span> Public beta now open for iPhone, iPad, and Mac</p>
+    </div>
+    <div class="composite">
+      <img class="mac" src="screenshots/mac-1.jpg" width="1600" height="1000"
+           alt="Lapilli on the Mac: the carved board beside the score cards and controls">
+      <img class="iph" src="screenshots/iphone-1.jpg" width="644" height="1400"
+           alt="The same game on iPhone">
+    </div>
   </header>
 
-  <!-- ══════════════════ STORY ══════════════════ -->
-  <main class="content">
+  <div class="proof">
+    <span>One purchase</span><span>No ads</span><span>No subscriptions</span><span>No tracking</span>
+  </div>
 
-    <!-- Section 1: Setting the scene -->
-    <section class="story-section" id="story">
-      <p>In the summer of 79 AD, the mountain above Pompeii was alive.</p>
-      <p>Not with fire — not yet — but with the low, restless tremors that the locals had grown so accustomed to that they no longer remarked on them. Vesuvius had shaken the region for years. It had cracked amphora, shifted doorframes, and sent wine sloshing from unattended cups. The citizens of Pompeii had learned to pour a little less and worry a little less, and life continued in the comfortable, unhurried rhythm of a prosperous Roman port city in high summer.</p>
-      <p>On the Via dell'Abbondanza, the main artery of the city, there was a thermopolium — a street-side tavern — run by a woman named Asellina, whose name is still scratched into the election notices on the wall outside. Her establishment was a favourite of soldiers, merchants, and the young men who did not yet need to be merchants. The counter was volcanic basalt, worn smooth by decades of elbows. The food was kept warm in terracotta vessels sunk into the stone. And at the back, where the light came in sideways through a narrow window, there was a gaming table.</p>
-      <p>It was here, in the months before the eruption, that a game was played which the men who played it simply called <em>lapilli</em> — little stones.</p>
-    </section>
+  <div class="stats">
+    <div class="stat"><b>19 × 19</b><span>A board with room to scheme</span></div>
+    <div class="stat"><b>4 opponents</b><span>A guild, measured rung by rung</span></div>
+    <div class="stat"><b>4 rule sets</b><span>Classic, Keryo, and tournament</span></div>
+    <div class="stat"><b>Your pace</b><span>Solo, local, or by mail</span></div>
+  </div>
 
-    <!-- IMAGE 1: Romans playing at the thermopolium -->
-    <img class="mosaic-image" src="images/thermopolium.png" alt="Romans playing Lapilli at Asellina's thermopolium">
-    <p class="mosaic-caption">Mosaic depiction · Asellina's thermopolium, Via dell'Abbondanza</p>
+  <section id="play">
+    <p class="kicker">The game in thirty seconds</p>
+    <h2>Simple rules. <em>Unstable positions.</em></h2>
+    <p class="sub">Lapilli begins like a familiar five-in-a-row game. Captures change everything: the line you are building can disappear in a single move.</p>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h3>Make five</h3>
+        <p>Place five stones in an unbroken line — horizontal, vertical, or diagonal.</p>
+        <svg class="capdemo" viewBox="0 0 190 46" role="img" aria-label="Five in a row: a fifth stone lands and the winning line strikes through">
+          <line x1="10" y1="23" x2="180" y2="23" stroke="rgba(201,168,76,0.4)"/>
+          <circle cx="31" cy="23" r="13" fill="#e8d5a3"/>
+          <circle cx="63" cy="23" r="13" fill="#e8d5a3"/>
+          <circle cx="95" cy="23" r="13" fill="#e8d5a3"/>
+          <circle cx="127" cy="23" r="13" fill="#e8d5a3"/>
+          <circle class="placer" cx="159" cy="23" r="13" fill="#e8d5a3"/>
+          <line class="winline" x1="18" y1="23" x2="172" y2="23"
+            stroke="#a83a26" stroke-width="3.5" stroke-linecap="round" pathLength="100"/>
+        </svg></div>
+      <div class="step"><span class="num">02</span><h3>Take five pairs</h3>
+        <p>Flank two enemy stones to remove them. Capture five pairs and the game is yours.</p>
+        <svg class="capdemo" viewBox="0 0 190 46" role="img" aria-label="A capture: a placed stone brackets an enemy pair and the pair fades away">
+          <line x1="10" y1="23" x2="180" y2="23" stroke="rgba(201,168,76,0.4)"/>
+          <circle cx="35" cy="23" r="13" fill="#e8d5a3"/>
+          <circle class="victim" cx="80" cy="23" r="13" fill="#4a6b33"/>
+          <circle class="victim" cx="122" cy="23" r="13" fill="#4a6b33"/>
+          <circle class="placer" cx="164" cy="23" r="13" fill="#e8d5a3"/>
+        </svg></div>
+      <div class="step"><span class="num">03</span><h3>Hold the initiative</h3>
+        <p>Create threats that demand answers. Defend the line and the capture at the same time.</p>
+        <svg class="capdemo" viewBox="0 0 190 46" role="img" aria-label="An open three forms and both open ends demand an answer">
+          <line x1="10" y1="23" x2="180" y2="23" stroke="rgba(201,168,76,0.4)"/>
+          <circle class="endmark" cx="35" cy="23" r="12" fill="none"
+            stroke="#e8d5a3" stroke-width="2" stroke-dasharray="4 4"/>
+          <circle cx="65" cy="23" r="13" fill="#4a6b33"/>
+          <circle cx="95" cy="23" r="13" fill="#4a6b33"/>
+          <circle class="placer" cx="125" cy="23" r="13" fill="#4a6b33"/>
+          <circle class="endmark" cx="155" cy="23" r="12" fill="none"
+            stroke="#e8d5a3" stroke-width="2" stroke-dasharray="4 4"/>
+        </svg></div>
+    </div>
+    <p class="after">Learn the basics in minutes. Spend years seeing what you missed.</p>
+    <p style="text-align:center; margin-top:0.6rem"><a class="more" href="manual.html">Read the full rules and manual →</a></p>
+  </section>
 
-    <!-- Section 2: The glass drops -->
-    <section class="story-section">
-      <p>The pieces were not carved or purchased. That is what made them remarkable.</p>
-      <p>Three doors down from Asellina's thermopolium, a glassblower named Eros kept his furnace burning from before sunrise until well after dark. Each morning he swept his workshop floor and found them waiting: small rounded drops of glass that had fallen from the rod overnight and cooled where they landed — perfect little domes, smooth on the bottom, slightly convex on top, fitting cleanly between thumb and forefinger. Most were discarded. Some he melted back down. But the ones in the two colours his furnace most often produced — a deep sea-green from the copper in his sand, and a warm amber-yellow from the iron and sulfur that clung to everything near the mountain — those he swept into a clay pot by the door.</p>
-      <p>Someone from Asellina's had started collecting them. No one remembered exactly when or who. What they remembered was that the drops were the right size, the right weight, and that when you set them on a scratched grid of nineteen lines, they sat still and caught the light.</p>
-    </section>
+  <section>
+    <p class="kicker">Play it your way</p>
+    <h2>No lobby. No grind. <em>Just the next move.</em></h2>
+    <p class="sub">Play beside a friend, face the computer, or send a move through Game Center and return when the board calls you back.</p>
+    <div class="cards">
+      <div class="card"><span class="num">I</span><h3>Across the table</h3>
+        <p>Two players, one board, and nothing between you but the position.</p></div>
+      <div class="card"><span class="num">II</span><h3>Against the guild</h3>
+        <p>Four computer opponents, each one measurably stronger than the last.</p></div>
+      <div class="card"><span class="num">III</span><h3>By mail</h3>
+        <p>Turn-based matches through Game Center — take your next move when you are ready.</p></div>
+    </div>
+  </section>
 
-    <!-- IMAGE 2: The glassblower Eros -->
-    <img class="mosaic-image" src="images/glassblower.png" alt="The glassblower Eros at his furnace in Pompeii">
-    <p class="mosaic-caption">Mosaic depiction · Eros at the furnace, his glass drops cooling on the floor</p>
+  <section id="guild">
+    <p class="kicker">An honest ladder</p>
+    <h2>Four opponents. <em>Four different conversations.</em></h2>
+    <p class="sub">Not four labels on the same machine. Each rung is measured against the one below it and tuned to teach a different lesson.</p>
+    <div class="ladder">
+      <div class="rung"><span class="rn">I</span><span class="name">Novice</span>
+        <span class="line">Sees the immediate danger, forgives the human one.</span></div>
+      <div class="rung"><span class="rn">II</span><span class="name">Apprentice</span>
+        <span class="line">Looks past the move and begins collecting careless pairs.</span></div>
+      <div class="rung"><span class="rn">III</span><span class="name">Journeyman</span>
+        <span class="line">Sees several replies and makes a blunder feel expensive.</span></div>
+      <div class="rung"><span class="rn">IV</span><span class="name">Artisan</span>
+        <span class="line">Takes its time, reads deeply, and rarely returns the initiative.</span></div>
+    </div>
+    <a class="more" href="opponents.html">Meet the guild and see how it was measured →</a>
+  </section>
 
-    <!-- Section 3: The game itself -->
-    <section class="story-section">
-      <p>The game that emerged from those glass drops was not Terni Lapilli, the old tic-tac-toe that children scratched on stepping stones. It was something deeper and more violent: a game of five, of encirclement, of the same custodial destruction that Roman legions practised on the field.</p>
-      <p>The object was to place five of your stones in a row — but the board did not stay still. A pair of your opponent's stones, caught between two of your own, was captured and removed. Flanked, and gone. The Romans had a word for this: <em>intercipere</em> — to seize in between. It was how they dealt with enemies. It was, the soldiers felt, entirely natural.</p>
+  <section id="study">
+    <p class="kicker">A study of your own</p>
+    <h2>The game ends. <em>The learning begins.</em></h2>
+    <p class="sub">Lapilli does more than hand you a hint. It keeps the whole path from a played game to a better next one.</p>
+    <div class="loop">
+      <figure><img src="screenshots/manual-review.jpg" width="900" height="1956" loading="lazy"
+          alt="The walk-back: a reviewed position with the engine's one-line reading">
+        <figcaption>Walk any finished game move by move and find where the position turned.</figcaption></figure>
+      <figure><img src="screenshots/manual-practice.jpg" width="900" height="1956" loading="lazy"
+          alt="The Practice Board with a book problem loaded and the answer explained">
+        <figcaption>Open the book's problems on a real board, with hints that explain why.</figcaption></figure>
+      <figure><img src="screenshots/manual-mirror.jpg" width="900" height="1956" loading="lazy"
+          alt="The Mirror: a chart of repeated mistakes fading over time">
+        <figcaption>The Mirror charts the mistakes you repeat — and whether they are fading.</figcaption></figure>
+    </div>
+    <div class="book"><h3>A book that belongs beside the board</h3>
+      <p>History, vocabulary, strategy, annotated positions, and problems — a 160-page companion written for the same game you are holding, included inside the app.</p></div>
+  </section>
 
-      <div class="pull-quote">
-        <p>"A position that looked winning could be collapsed in two moves by a well-placed capture. A player who had given up five stones was not losing — he might be baiting a trap."</p>
-      </div>
+  <section class="gallery">
+    <p class="kicker">On every screen you own</p>
+    <h2>See it <em>played.</em></h2>
+    <p class="sub" style="margin-left:auto; margin-right:auto">A carved board, hand-made glass, and synthesized lyre and birdsong — the board as it appears on your device.</p>
 
-      <p>A man named Marcus Decimus Vitalis — a veteran of the Legio II Adiutrix, passing through Pompeii on his way to retirement in Puteoli — is said to have taught the full rules to Asellina's regulars sometime in the spring of that year. He had learned the game at a garrison in Dacia, he told them, from a Greek-speaking merchant who claimed it was older than Rome. Whether this was true no one could verify.</p>
-      <p>By August, the game had its own vocabulary in Asellina's back room. A line of three open stones was a <em>tria</em>, a threat. A line of four was a <em>tessera</em> — a tile, a piece, a word that meant something nearly complete. And the winning line of five was, of course, the <em>lapilli</em> itself: five small stones in a row, simple as the mountain above, and just as inevitable once the sequence had begun. The mountain rumbled outside, and the men inside did not look up.</p>
-    </section>
-
-    <div class="divider">· · ·</div>
-
-    <!-- Section 4: The eruption -->
-    <section class="story-section">
-      <p>On the morning of August 24th, the mountain answered.</p>
-      <p>The eruption came in two phases. The first was lapilli — the real ones, the volcanic kind, pumice the size of a fist raining from a column of ash that rose eighteen miles into the sky. They fell for hours, filling the streets, collapsing roofs, burying the city under six metres of stone before the pyroclastic surge came at dawn and ended everything still living.</p>
-    </section>
-
-    <!-- IMAGE 3: Vesuvius erupting -->
-    <img class="mosaic-image" src="images/vesuvius.png" alt="Vesuvius erupting over Pompeii, 79 AD">
-    <p class="mosaic-caption">Mosaic depiction · The eruption of Vesuvius · August 24th, 79 AD</p>
-
-    <!-- Section 5: The discovery -->
-    <section class="story-section">
-      <p>When archaeologists excavated the thermopolium centuries later, they found the counter intact, the food still in the vessels, the election notices still on the wall. They found dice. They found coins. In the back room, beneath a layer of compacted pumice, they found a rectangular stone table with a nineteen-by-nineteen grid scratched into its surface, and beside it, in what had once been a wooden box, a collection of small glass drops — green and amber, smooth on their flat bases, domed on top, sorted into two groups, worn with the particular polish that only comes from being picked up and set down thousands of times.</p>
-      <p>No one had played them since that August morning. They had been waiting in the dark for two thousand years.</p>
-    </section>
-
-    <!-- IMAGE 4: The abandoned board -->
-    <img class="mosaic-image" src="images/board.png" alt="The Lapilli board discovered in the ruins of Pompeii">
-    <p class="mosaic-caption">Mosaic depiction · The board, as found · Pompeii excavations</p>
-
-    <!-- Section 6: The conclusion -->
-    <section class="story-section">
-      <p>The game that buried them had also preserved them.</p>
-      <p>That is the paradox of Pompeii, and the paradox of <em>lapilli</em> — the small stones that gave the game its name, and the small stones that fell from the sky and froze it in time. What the volcano destroyed, it also kept. What it ended, it made permanent.</p>
-      <p>We cannot know Marcus Decimus Vitalis. We cannot know if he made it to Puteoli. We cannot know who was winning when the mountain roared and the pieces scattered.</p>
-      <p>But we know the game. We know its shape and its logic and the particular pleasure of watching a pair of your opponent's stones vanish from the board. We know the three-in-a-row threat and the four-in-a-row inevitability and the five-in-a-row that ends everything.</p>
-      <p>The Romans knew it too. They played it with drops of glass from the furnace down the street, green and amber against a scratched grid, while the mountain that would bury them rumbled quietly outside.</p>
-      <p><strong style="color: var(--gold-lt);">We play it still.</strong></p>
-    </section>
-
-    <section class="story-section">
-      <p style="font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.75;">The true history</p>
-      <p>That is the legend — fiction, and offered as nothing else. The real history is just as good a story. The game the modern world knows as <strong>Pente®</strong> was created by Gary Gabrel in Stillwater, Oklahoma, in 1977, on these same nineteen lines with these same two roads to victory. Its first world champions, Rollie Tesh and Tom Braunlich, became its first serious theorists — Tesh's Keryo variant and the tournament rule from Braunlich's era are both in this app, under their proper names. Pente is a registered trademark of Hasbro, Inc., with which we are not affiliated; that is why the game here wears a name and a legend of its own. Everything the app teaches applies unchanged at any Pente table, cardboard or glass — and the companion book's history chapter traces the whole lineage, from Edo-period Japan to a pizza restaurant in Oklahoma, with sources.</p>
-    </section>
-
-    <div class="divider">· · ·</div>
-
-    <!-- ══════════════════ HOW TO PLAY ══════════════════ -->
-    <div class="how-to-play">
-      <h2>How to Play Lapilli Stones</h2>
-      <p class="subtitle">The rules of the ancient game, as played today</p>
-
-      <h3>The Board</h3>
-      <p>Lapilli Stones is played on a 19×19 grid of intersections. Stones are placed on the intersections — not the squares — in the manner of Go. The board begins entirely empty.</p>
-
-      <h3>Two Ways to Win</h3>
-      <div class="win-conditions">
-        <div class="win-card">
-          <div class="win-number">Five</div>
-          <p><strong>In a row.</strong> Place five or more of your stones in an unbroken line — horizontally, vertically, or diagonally.</p>
-        </div>
-        <div class="win-card">
-          <div class="win-number">Five</div>
-          <p><strong>Captured pairs.</strong> Seize ten of your opponent's stones — pair by pair — until they can no longer defend.</p>
-        </div>
-      </div>
-
-      <h3>Opening Move</h3>
-      <p>The first player opens on the center intersection. Under tournament rules (recommended), the first player's <em>second</em> stone must be placed at least three intersections away from center — this limits the first-player advantage and keeps the game balanced.</p>
-
-      <h3>Captures</h3>
-      <p>This is what sets Lapilli Stones apart from all other five-in-a-row games. When exactly two of your opponent's stones sit adjacent to each other, they can be seized by flanking them on both ends with your own stones in a straight line — the Roman <em>intercipere</em>.</p>
-
-      <div class="capture-example">⬤ ○ ○ ▢ &nbsp;→&nbsp; place your stone &nbsp;→&nbsp; ⬤ ○ ○ ⬤ &nbsp;→&nbsp; ⬤ ▢ ▢ ⬤</div>
-
-      <p>Captures work horizontally, vertically, and diagonally. Multiple pairs can be captured in a single move. Importantly: you may safely place a stone between two enemy stones — a pair is captured only when the opponent flanks it, not when you complete it yourself.</p>
-
-      <h3>The Language of the Game</h3>
-      <div class="vocab-grid">
-        <span class="vocab-term">Tria</span>
-        <span class="vocab-def">Three unblocked stones in a row — a live threat that demands a response.</span>
-        <span class="vocab-term">Tessera</span>
-        <span class="vocab-def">Four unblocked stones in a row — nearly always a forced win on the next move.</span>
-        <span class="vocab-term">Lapilli</span>
-        <span class="vocab-def">Five stones in a row. The game ends. The mountain has spoken.</span>
-        <span class="vocab-term">Intercipere</span>
-        <span class="vocab-def">To seize in between — a capture. Two of your opponent's stones, flanked and removed.</span>
-      </div>
-
-      <h3>Strategy</h3>
-      <p>The central tension of Lapilli Stones is between building lines and preventing captures. A row of five wins the game — but formations that are vulnerable to flanking can be dismantled in a single move. The strongest players maintain <em>initiative</em>: creating threats faster than the opponent can respond, forcing them to defend while your own positions compound.</p>
-      <p>Avoid adjacent pairs early — they are the only formations susceptible to capture. Build instead with stretch twos (stones with a gap between them), which threaten to extend into a tria without exposing themselves to immediate seizure. When you form an unblocked four, announce it: <em>tessera</em>. It is considered good form to give your opponent the chance to stop what is coming.</p>
-
-      <h3>Variants</h3>
-      <p><strong style="color: var(--gold-lt);">Keryo-Lapilli:</strong> Captures extend to triplets as well as pairs. The capture-victory threshold rises to fifteen stones. Proposed by champion Rollie Tesh in 1983 to reward more aggressive and tactical play.</p>
-      <p><strong style="color: var(--gold-lt);">Tournament (Pro) Rules:</strong> The first player's second stone must be placed outside the inner 5×5 zone. Reduces the first-player advantage at high levels of play.</p>
+    <div class="device-tabs" role="tablist" aria-label="Choose a device">
+      <button class="device-tab" role="tab" id="tab-ipad" aria-selected="true" aria-controls="strip-ipad" data-device="ipad">iPad</button>
+      <button class="device-tab" role="tab" id="tab-iphone" aria-selected="false" aria-controls="strip-iphone" tabindex="-1" data-device="iphone">iPhone</button>
+      <button class="device-tab" role="tab" id="tab-mac" aria-selected="false" aria-controls="strip-mac" tabindex="-1" data-device="mac">Mac</button>
     </div>
 
-    <!-- ══════════════════ FEATURES ══════════════════ -->
-    <div class="features">
-      <h2>The Game, In Your Hands</h2>
-      <p class="subtitle">Everything in one purchase — no ads, no subscriptions, no tracking</p>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h4>Three Ways to Play</h4>
-          <p>Face a friend on the same board, challenge the computer across four opponents, or play "by mail" over Game Center — moves travel across the world while each player takes their turn in their own time. Keep as many games going at once as you have friends.</p>
-        </div>
-        <div class="feature-card">
-          <h4>Four Rule Sets</h4>
-          <p>Classic Lapilli, Keryo-Lapilli with its triplet captures, and Tournament openings that temper the first-player advantage — four presets combining them, all included, switched freely.</p>
-        </div>
-        <div class="feature-card">
-          <h4>A Worthy Opponent</h4>
-          <p>Four opponents, named like a guild: Novice, Apprentice, Journeyman, Artisan. Each rung genuinely beats the one below it, from a forgiving teacher to a craftsman that thinks four full seconds on every move. A hint button lends you its eyes when you need them. <a href="opponents.html">Meet the four →</a></p>
-        </div>
-        <div class="feature-card">
-          <h4>Made by Hand</h4>
-          <p>A carved, painted wooden board and forty individually crafted glass stones — no two games ever look alike. Every sound is synthesized from scratch: lyre strings, wind through poplars, birdsong.</p>
-        </div>
-        <div class="feature-card">
-          <h4>Learn in Minutes</h4>
-          <p>An interactive tutorial walks through every rule, variant, and online feature — from your first stone to your first capture.</p>
-        </div>
-        <div class="feature-card">
-          <h4>A Study of Your Own</h4>
-          <p>Every finished game is recorded and can be walked through move by move, with the computer's reading of each position beside the board. A practice board opens the companion book's problems on real wood, and the Mirror charts the mistakes you repeat — and whether they're fading. <a href="manual.html">Read the manual →</a></p>
-        </div>
-        <div class="feature-card">
-          <h4>Yours, Everywhere</h4>
-          <p>One purchase covers Mac, iPad, and iPhone. Solo play works entirely offline, your game is always saved exactly where you left it, and your recorded games travel between your devices through your own iCloud.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════════════════ SCREENSHOTS ══════════════════ -->
-    <div class="gallery">
-      <h2>See It Played</h2>
-      <p class="subtitle">The board as it appears on your device</p>
-
-      <div class="device-tabs">
-        <button class="device-tab active" data-device="ipad">iPad</button>
-        <button class="device-tab" data-device="iphone">iPhone</button>
-        <button class="device-tab" data-device="mac">Mac</button>
+    <div class="gallery-viewport">
+      <div class="shot-strip" role="tabpanel" id="strip-ipad" aria-labelledby="tab-ipad" data-device="ipad">
+        <figure class="shot-slide">
+          <img src="screenshots/ipad-1.jpg" alt="A midgame of Lapilli on iPad" loading="lazy">
+          <figcaption>A midgame against the computer</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/ipad-2.jpg" alt="The Lapilli tutorial on iPad" loading="lazy">
+          <figcaption>A tutorial walks through every rule</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/ipad-3.jpg" alt="Lapilli settings on iPad" loading="lazy">
+          <figcaption>Variants, sound, and online play</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/ipad-4.jpg" alt="A five-in-a-row victory in Lapilli on iPad" loading="lazy">
+          <figcaption>Five in a row — the mountain has spoken</figcaption>
+        </figure>
       </div>
 
-      <div class="gallery-viewport">
-        <div class="shot-strip" data-device="ipad">
-          <figure class="shot-slide">
-            <img src="screenshots/ipad-1.jpg" alt="A midgame of Lapilli on iPad" loading="lazy">
-            <figcaption>A midgame against the computer</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/ipad-2.jpg" alt="The Lapilli tutorial on iPad" loading="lazy">
-            <figcaption>A tutorial walks through every rule</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/ipad-3.jpg" alt="Lapilli settings on iPad" loading="lazy">
-            <figcaption>Variants, sound, and online play</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/ipad-4.jpg" alt="A five-in-a-row victory in Lapilli on iPad" loading="lazy">
-            <figcaption>Five in a row — the mountain has spoken</figcaption>
-          </figure>
-        </div>
-
-        <div class="shot-strip hidden" data-device="iphone">
-          <figure class="shot-slide">
-            <img src="screenshots/iphone-1.jpg" alt="A midgame of Lapilli on iPhone" loading="lazy">
-            <figcaption>A midgame against the computer</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/iphone-5.jpg" alt="The Lapilli board zoomed in on iPhone, stones at full size" loading="lazy">
-            <figcaption>Pinch to zoom — fully playable on a phone</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/iphone-2.jpg" alt="The Lapilli tutorial on iPhone" loading="lazy">
-            <figcaption>A tutorial walks through every rule</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/iphone-3.jpg" alt="Lapilli settings on iPhone" loading="lazy">
-            <figcaption>Variants, sound, and online play</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/iphone-4.jpg" alt="A five-in-a-row victory in Lapilli on iPhone" loading="lazy">
-            <figcaption>Five in a row — the mountain has spoken</figcaption>
-          </figure>
-        </div>
-
-        <div class="shot-strip hidden" data-device="mac">
-          <figure class="shot-slide">
-            <img src="screenshots/mac-1.jpg" alt="A midgame of Lapilli on Mac" loading="lazy">
-            <figcaption>A midgame against the computer</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/mac-2.jpg" alt="The Lapilli tutorial on Mac" loading="lazy">
-            <figcaption>A tutorial walks through every rule</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/mac-3.jpg" alt="Lapilli settings on Mac" loading="lazy">
-            <figcaption>Variants, sound, and online play</figcaption>
-          </figure>
-          <figure class="shot-slide">
-            <img src="screenshots/mac-4.jpg" alt="A five-in-a-row victory in Lapilli on Mac" loading="lazy">
-            <figcaption>Five in a row — the mountain has spoken</figcaption>
-          </figure>
-        </div>
-
-        <button class="gallery-arrow prev" aria-label="Previous screenshot">&#8249;</button>
-        <button class="gallery-arrow next" aria-label="Next screenshot">&#8250;</button>
+      <div class="shot-strip hidden" role="tabpanel" id="strip-iphone" aria-labelledby="tab-iphone" data-device="iphone">
+        <figure class="shot-slide">
+          <img src="screenshots/iphone-1.jpg" alt="A midgame of Lapilli on iPhone" loading="lazy">
+          <figcaption>A midgame against the computer</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/iphone-5.jpg" alt="The Lapilli board zoomed in on iPhone, stones at full size" loading="lazy">
+          <figcaption>Pinch to zoom — fully playable on a phone</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/iphone-2.jpg" alt="The Lapilli tutorial on iPhone" loading="lazy">
+          <figcaption>A tutorial walks through every rule</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/iphone-3.jpg" alt="Lapilli settings on iPhone" loading="lazy">
+          <figcaption>Variants, sound, and online play</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/iphone-4.jpg" alt="A five-in-a-row victory in Lapilli on iPhone" loading="lazy">
+          <figcaption>Five in a row — the mountain has spoken</figcaption>
+        </figure>
       </div>
 
-      <div class="gallery-dots"></div>
+      <div class="shot-strip hidden" role="tabpanel" id="strip-mac" aria-labelledby="tab-mac" data-device="mac">
+        <figure class="shot-slide">
+          <img src="screenshots/mac-1.jpg" alt="A midgame of Lapilli on Mac" loading="lazy">
+          <figcaption>A midgame against the computer</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/mac-2.jpg" alt="The Lapilli tutorial on Mac" loading="lazy">
+          <figcaption>A tutorial walks through every rule</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/mac-3.jpg" alt="Lapilli settings on Mac" loading="lazy">
+          <figcaption>Variants, sound, and online play</figcaption>
+        </figure>
+        <figure class="shot-slide">
+          <img src="screenshots/mac-4.jpg" alt="A five-in-a-row victory in Lapilli on Mac" loading="lazy">
+          <figcaption>Five in a row — the mountain has spoken</figcaption>
+        </figure>
+      </div>
+
+      <button class="gallery-arrow prev" aria-label="Previous screenshot">&#8249;</button>
+      <button class="gallery-arrow next" aria-label="Next screenshot">&#8250;</button>
     </div>
 
-    <!-- ══════════════════ APP DOWNLOAD ══════════════════ -->
-    <div class="app-callout">
-      <p class="eyebrow">Available for</p>
-      <h2>iPad · iPhone · Mac</h2>
-      <p class="platforms">One purchase — the full board on every screen</p>
-      <a href="#" class="app-store-btn coming-soon">Coming to the App Store</a>
+    <div class="gallery-dots"></div>
+  </section>
+
+  <section id="legend">
+    <p class="kicker">An original Roman legend</p>
+    <h2>Pompeii, 79 AD. <em>The little stones that waited beneath a volcano.</em></h2>
+    <div class="legend">
+      <p>Imagine a back room in Pompeii: green and amber drops of glass, a nineteen-line board, and a game of alignment and capture played while Vesuvius murmured above the city.</p>
+      <p class="fine">That is the legend of Lapilli — fiction, offered as fiction, and a frame for a real tradition of five-in-a-row and custodial-capture games.</p>
+      <div class="cta-row">
+        <a class="btn ghost" href="story.html">Read the full illustrated story →</a>
+      </div>
     </div>
+  </section>
 
-  </main>
+  <section class="finale">
+    <p class="kicker">The board is nearly ready</p>
+    <h2>Your next move <em>can wait for you.</em></h2>
+    <p class="sub">Lapilli Stones is in public beta for iPhone, iPad, and Mac. Take a seat at the board today.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn" href="https://testflight.apple.com/join/K7HAw4PP">Join the public beta</a>
+    </div>
+    <p class="fine">Opens on Apple TestFlight.</p>
+  </section>
 
-  <!-- ══════════════════ FOOTER ══════════════════ -->
   <footer>
     <div class="footer-logo">LAPILLI STONES</div>
     <p>lapilli-stones.com &nbsp;·&nbsp; The ancient game of five and capture</p>
     <br>
-    <p><a href="support.html">Support</a> &nbsp;·&nbsp; <a href="manual.html">User Manual</a> &nbsp;·&nbsp; <a href="press.html">Press</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="roadmap.html">What's Coming</a> &nbsp;·&nbsp; <a href="opponents.html">The Opponents</a> &nbsp;·&nbsp; <a href="testers.html">Beta Testers</a></p>
+    <p><a href="support.html">Support</a> &nbsp;·&nbsp; <a href="manual.html">User Manual</a> &nbsp;·&nbsp; <a href="story.html">The Story</a> &nbsp;·&nbsp; <a href="press.html">Press</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="roadmap.html">What's Coming</a> &nbsp;·&nbsp; <a href="opponents.html">The Opponents</a> &nbsp;·&nbsp; <a href="testers.html">Beta Testers</a></p>
     <br>
     <p style="font-size:0.75rem; opacity:0.4;">The game mechanics of Lapilli Stones derive from a documented tradition of five-in-a-row and custodial-capture games, known today as Pente® — a registered trademark of Hasbro, Inc., with which we are not affiliated.<br>
     The name and this presentation are original works.</p>
@@ -815,7 +624,7 @@
           (function (i) {
             var b = document.createElement('button');
             if (i === index) b.classList.add('active');
-            b.setAttribute('aria-label', 'Screenshot ' + (i + 1));
+            b.setAttribute('aria-label', 'Screenshot ' + (i + 1) + ' of ' + count);
             b.addEventListener('click', function () {
               strip.scrollTo({ left: i * strip.clientWidth, behavior: 'smooth' });
             });
@@ -824,16 +633,30 @@
         }
       }
 
-      tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          tabs.forEach(function (t) {
-            t.classList.toggle('active', t === tab);
-          });
-          strips.forEach(function (s) {
-            s.classList.toggle('hidden', s.getAttribute('data-device') !== tab.getAttribute('data-device'));
-          });
-          active().scrollTo({ left: 0 });
-          renderDots();
+      function selectTab(tab) {
+        tabs.forEach(function (t) {
+          var selected = t === tab;
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          if (selected) { t.removeAttribute('tabindex'); }
+          else { t.setAttribute('tabindex', '-1'); }
+        });
+        strips.forEach(function (s) {
+          s.classList.toggle('hidden', s.getAttribute('data-device') !== tab.getAttribute('data-device'));
+        });
+        active().scrollTo({ left: 0 });
+        renderDots();
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { selectTab(tab); });
+        // Roving focus with arrow keys, per the ARIA tabs pattern.
+        tab.addEventListener('keydown', function (e) {
+          var delta = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (!delta) return;
+          e.preventDefault();
+          var next = tabs[(i + delta + tabs.length) % tabs.length];
+          selectTab(next);
+          next.focus();
         });
       });
 
