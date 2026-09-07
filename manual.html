@@ -186,16 +186,18 @@
 
   <h2 id="mirror">The Mirror</h2>
   <figure>
-    <img src="screenshots/manual-mirror.jpg" alt="The Mirror: a line chart of mistake rates per hundred moves across games, a legend of three categories, and a list of flagged moves with explanations" loading="lazy">
-    <figcaption>Three kinds of mistake, charted oldest game to newest — this one is fading.</figcaption>
+    <img src="screenshots/manual-mirror.jpg?v=2" alt="The Mirror: a picker for mistake type over a chart with a heavy trend line, and flagged moves gathered into groups by type" loading="lazy">
+    <figcaption>One story at a time: the heavy line is the trend, and falling means fewer mistakes.</figcaption>
   </figure>
-  <p>The Mirror reads back through every finished game against the AI on your device and charts the mistakes you repeat, as a rate per hundred of your own moves, oldest game to newest — so you can see whether they're fading as you improve. It counts exactly three things, and all of them are facts the record proves, never an engine's opinion:</p>
+  <p>The Mirror reads back through every finished game against the AI in your archive and charts the mistakes you repeat, as a rate per hundred of your own moves, oldest game to newest. The chart tells one story at a time: <strong>All</strong> shows your combined rate, or pick a single mistake type to isolate it. Each game is a faint spike; the heavy line is the running trend, averaged over recent games, and that line falling is the answer to "am I getting better?"</p>
+  <p>It counts exactly three things, and all of them are facts the record proves, never an engine's opinion:</p>
   <ul>
-    <li><strong>Allowed the loss.</strong> A threat demanded an answer, none came, and the opponent won on the very next move.</li>
-    <li><strong>Let a threat grow.</strong> A threat demanded an answer, none came, and within three moves it had grown into a four.</li>
+    <li><strong>Allowed the loss.</strong> A threat demanded an answer, your move was not one, and the opponent won on the very next move. The ignored threat was already lethal.</li>
+    <li><strong>Let a threat grow.</strong> The same sin with a slower bill: a threat demanded an answer, your move was not one, and although the opponent did not win at once, within the next three moves the ignored threat had matured into a four — or won after all.</li>
     <li><strong>Missed a capture threat.</strong> A capture threat against the opponent's shapes was there for the taking, went unplayed, and was gone a move later.</li>
   </ul>
-  <p>A threat you ignored that the opponent never punished is deliberately <em>not</em> counted. And every flagged move opens in the walk-back at that exact position, ring on the move, so you can judge the claim on the board yourself. The analysis runs entirely on your device and is cached, so the Mirror opens instantly after the first look.</p>
+  <p>The first two categories begin identically — an unanswered demand — and differ only in the verified consequence. No move is ever counted twice: if the opponent won immediately it is Allowed the loss, and only otherwise can it be Let a threat grow, so the worse label always wins. One honest wrinkle: if you ignored a killing threat and the opponent <em>missed</em> the kill, then landed it a move or two later, that files under Let a threat grow — the immediate-loss label is strict about "very next move."</p>
+  <p>A threat you ignored that the opponent never punished at all is deliberately <em>not</em> counted — the Mirror only claims what the record can prove, because one wrong flag would cost it your trust. Below the chart, the flagged moves are gathered into collections by type, counts in the headers, so you can study all your similar problems together; tapping a header focuses the chart on that type, and tapping any move opens the walk-back at that exact position, ring on the move, so you can judge the claim on the board yourself. The analysis runs entirely on your device and is cached, so the Mirror opens instantly after the first look.</p>
 
   <h2 id="zoom">Zoom and pan on the phone</h2>
   <p>Nineteen lines each way is a lot of board for a hand's width of glass. On iPhone and iPad, pinch to zoom into the part of the board where the fight is happening — stones become comfortably tappable — then drag with one finger to follow the action. Placing stones works the same while zoomed, and the fit button in the corner returns the whole board in one tap. Most players zoom in early and stay there. The Practice Board zooms the same way.</p>
