@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <title>Lapilli Stones — Practice Board</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #c9a84c; --gold-lt: #e8d5a3; --stone: #1a1510; --cream: #f5efe0;
+    }
+    body {
+      background: var(--stone); color: var(--cream);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem; line-height: 1.7;
+      max-width: 760px; margin: 0 auto; padding: 2.5rem 1rem 3rem;
+    }
+    h1 { font-family: Georgia, serif; color: var(--gold-lt); letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+    .tagline { color: var(--gold); opacity: 0.6; font-size: 0.85rem; margin-bottom: 1.4rem; }
+    p { margin-bottom: 1rem; color: #ddd0bc; }
+    a { color: var(--gold); }
+    #board {
+      display: block; width: 100%; height: auto;
+      max-width: 720px; margin: 0 auto 1rem;
+      border-radius: 10px; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+      touch-action: manipulation;
+      user-select: none; -webkit-user-select: none;
+    }
+    .controls { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; margin-bottom: 0.8rem; }
+    .seg { display: inline-flex; border: 1px solid rgba(201, 168, 76, 0.55); border-radius: 7px; overflow: hidden; }
+    .seg button + button { border-left: 1px solid rgba(201, 168, 76, 0.35); }
+    button {
+      font: inherit; font-size: 0.95rem; color: var(--gold-lt);
+      background: transparent; border: none; padding: 0.35rem 0.9rem; cursor: pointer;
+    }
+    .seg button[aria-pressed="true"] { background: rgba(201, 168, 76, 0.28); color: var(--cream); }
+    .act { border: 1px solid rgba(201, 168, 76, 0.55); border-radius: 7px; }
+    button:hover:not(:disabled) { background: rgba(201, 168, 76, 0.14); }
+    button:disabled { opacity: 0.4; cursor: default; }
+    button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .label { font-size: 0.8rem; color: var(--gold); opacity: 0.75; margin-right: 0.3rem; letter-spacing: 0.04em; }
+    #status { font-size: 0.98rem; margin-bottom: 0.1rem; }
+    #captures { font-size: 0.9rem; opacity: 0.7; margin-bottom: 1rem; }
+    #linkOut {
+      width: 100%; font: inherit; font-size: 0.85rem; margin: 0.2rem 0 1rem;
+      padding: 0.35rem 0.5rem; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.4);
+      background: rgba(0, 0, 0, 0.25); color: var(--cream);
+    }
+    .help { font-size: 0.95rem; }
+    .footer { margin-top: 2rem; font-size: 0.85rem; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <h1>Practice Board</h1>
+  <p class="tagline">A board on the table, for readers of the companion book</p>
+
+  <svg id="board" role="img" aria-label="A 19 by 19 Lapilli board. Tap an intersection to place or remove a stone."></svg>
+
+  <div class="controls">
+    <span><span class="label">MODE</span><span class="seg">
+      <button type="button" data-group="mode" data-value="setup">Setup</button>
+      <button type="button" data-group="mode" data-value="play">Play</button>
+    </span></span>
+    <span><span class="label">STONE</span><span class="seg">
+      <button type="button" data-group="color" data-value="black">Black</button>
+      <button type="button" data-group="color" data-value="white">White</button>
+    </span></span>
+    <span><span class="label">TOOL</span><span class="seg">
+      <button type="button" data-group="tool" data-value="place">Place</button>
+      <button type="button" data-group="tool" data-value="remove">Remove</button>
+    </span></span>
+  </div>
+  <div class="controls">
+    <button type="button" class="act" id="undo">Undo</button>
+    <button type="button" class="act" id="clear">Clear board</button>
+    <button type="button" class="act" id="copy">Copy link to this position</button>
+  </div>
+  <input id="linkOut" type="text" readonly hidden aria-label="Link to this position">
+
+  <p id="status" aria-live="polite"></p>
+  <p id="captures"></p>
+
+  <p class="help"><strong>Setup</strong> arranges a position: stones go wherever you tap, in the colour selected, and nothing is captured — for copying a diagram from the book. <strong>Play</strong> works a line out: a pair flanked on both ends comes off the board, and the colour passes to the other side after each stone. Tap the other colour any time to play the same side twice. <strong>Remove</strong> takes any single stone away, and <strong>Undo</strong> steps back through anything you did.</p>
+  <p class="help">Your board is kept in this browser between visits. Every position also has its own link — copy it to send a position to a friend, or to come back to it later.</p>
+  <p class="help">This board knows only where the stones are. The game itself — four computer opponents, play by correspondence, and the whole book built in — is <a href="../index.html">Lapilli Stones</a>, for iPhone, iPad, and Mac.</p>
+
+  <p class="footer"><a href="index.html">The Reader's Shelf</a> &nbsp;·&nbsp; <a href="../index.html">Lapilli Stones</a> — the game that outlived a volcano.</p>
+
+  <script src="board.js?v=2"></script>
+</body>
+</html>
