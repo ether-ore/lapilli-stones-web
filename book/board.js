@@ -197,7 +197,8 @@
     return {
       board: emptyBoard(),
       captures: { [BLACK]: 0, [WHITE]: 0 },
-      color: BLACK,
+      // White moves first, always: the book, the app, and Pente.org.
+      color: WHITE,
       mode: 'setup',
       tool: 'place',
       last: null,
@@ -425,7 +426,7 @@
     remember();
     state.board = emptyBoard();
     state.captures = { [BLACK]: 0, [WHITE]: 0 };
-    state.color = BLACK;
+    state.color = WHITE;
     state.last = null;
     save();
     render();
