@@ -100,10 +100,76 @@
     };
   }
 
+  // A pasted game record, in any of the notations a reader meets:
+  //   the book and the app:  1. K10  2. K8 ... 17. H7 (×J8, K9)
+  //   Pente.org:             1. K10 - N10  2. N7 - L8 ...
+  //   a table:               1 <tab> K10 <tab> L10
+  // Only the points matter, in order: move numbers, dashes, tabs and
+  // [header] lines are ignored. A parenthesis after a move is that
+  // move's capture note -- checked against the rule, never played.
+  function parseGame(text) {
+    const raw = String(text);
+    if (/\[\s*Capture\s+"keryo"\s*\]/i.test(raw)) {
+      return { error: 'This record uses Keryo captures (three stones at a time). '
+        + 'This board plays standard pair captures only.' };
+    }
+    const body = raw.replace(/\[[^\]\n]*\]/g, ' ');
+    const POINT = /[A-HJ-T](?:1[0-9]|[1-9])(?![0-9])/gi;
+    const token = /\(([^)]*)\)|(^|[^A-Za-z0-9])([A-HJ-T](?:1[0-9]|[1-9]))(?![0-9])/gi;
+    const moves = [];
+    let m;
+    while ((m = token.exec(body))) {
+      if (m[1] !== undefined) {
+        if (moves.length) {
+          moves[moves.length - 1].noted =
+            (m[1].match(POINT) || []).map((s) => s.toUpperCase());
+        }
+        continue;
+      }
+      const square = m[3].toUpperCase();
+      moves.push({ square, rc: parseSquare(square), noted: null });
+    }
+    if (!moves.length) return { error: 'No moves found. Moves look like K10 or N7.' };
+    return { moves };
+  }
+
+  // Play a parsed record from an empty board, White first -- as in
+  // the book, the app, and Pente.org. Returns every position along
+  // the way, so Undo can step back one move at a time, or an error
+  // naming the move that cannot be played.
+  function replayGame(moves) {
+    const board = emptyBoard();
+    const captures = { [BLACK]: 0, [WHITE]: 0 };
+    let color = WHITE;
+    let last = null;
+    const positions = [];
+    const pos = () => ({ board: board.slice(), captures: { ...captures }, color, last });
+    for (let i = 0; i < moves.length; i++) {
+      const { square, rc, noted } = moves[i];
+      const [r, c] = rc;
+      if (at(board, r, c) !== EMPTY) {
+        return { error: `Move ${i + 1}, ${square}: that point is already taken.` };
+      }
+      positions.push(pos());
+      const taken = placeAndCapture(board, r, c, color).map(([a, b]) => squareName(a, b));
+      if (noted && noted.slice().sort().join() !== taken.slice().sort().join()) {
+        const said = noted.length ? noted.join(', ') : 'nothing';
+        const did = taken.length ? taken.join(', ') : 'nothing';
+        return { error: `Move ${i + 1}, ${square}: the record says it captured ${said}, `
+          + `but here it captures ${did}.` };
+      }
+      captures[color] += taken.length / 2;
+      color = other(color);
+      last = [r, c];
+    }
+    positions.push(pos());
+    return { positions };
+  }
+
   const rules = {
     SIZE, COLS, EMPTY, BLACK, WHITE,
     emptyBoard, at, squareName, parseSquare, placeAndCapture,
-    encodePosition, decodePosition,
+    encodePosition, decodePosition, parseGame, replayGame,
   };
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = rules;
@@ -374,6 +440,28 @@
     if (!done) { $('linkOut').select(); }
     $('copy').textContent = done ? 'Link copied' : 'Copy the link below';
     setTimeout(() => { $('copy').textContent = 'Copy link to this position'; }, 2000);
+  });
+
+  // A pasted record replaces the board as if each stone had been
+  // placed in Play mode: Undo steps back one move at a time, and one
+  // step past the first move restores the board from before the paste.
+  $('pasteGo').addEventListener('click', () => {
+    const parsed = parseGame($('pasteText').value);
+    const played = parsed.error ? parsed : replayGame(parsed.moves);
+    if (played.error) {
+      $('pasteMsg').textContent = played.error;
+      return;
+    }
+    const { positions } = played;
+    remember();
+    for (let k = 0; k < positions.length - 1; k++) undoStack.push(positions[k]);
+    while (undoStack.length > 1000) undoStack.shift();
+    Object.assign(state, positions[positions.length - 1], { mode: 'play', tool: 'place' });
+    const n = positions.length - 1;
+    $('pasteMsg').textContent =
+      `Set up ${n} move${n === 1 ? '' : 's'}. Undo steps back one move at a time.`;
+    save();
+    render();
   });
 
   // ---- Start ----
